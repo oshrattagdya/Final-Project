@@ -5,3 +5,4 @@ class Login_Locators:
     code_field = "input[placeholder='קוד']"
     button_phon = "//input[@value='שלח לי קוד']"
     button_login = "//input[@value='כניסה']"
+    name = "//body[1]/div[1]/div[1]/div[2]/div[1]/nav[1]/div[1]/div[1]/span[2]"
