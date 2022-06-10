@@ -1,14 +1,13 @@
 import pytest
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-
+from selenium.webdriver.common.by import By
 
 class Base:
 
     @pytest.fixture(autouse=True)
     def set_up(self):
         print("Initiating Chrome driver")
-        # self.driver = webdriver.Chrome('../Drivers/chromedriver.exe')
         self.driver = webdriver.Chrome(ChromeDriverManager().install())
         print("-----------------------------------------")
         print("Test is started")
