@@ -18,12 +18,6 @@ class DashboardPageFunc():
         self.users = DashboardLocators.users
         self.allnav = DashboardLocators.allnav
 
-    def connect(self):
-        self.driver.find_element(By.CSS_SELECTOR, "input[placeholder='טלפון']").send_keys('1950000000')
-        self.driver.find_element(By.XPATH, "//input[@value='שלח לי קוד']").click()
-        self.driver.find_element(By.CSS_SELECTOR, "input[placeholder='קוד']").send_keys('1234')
-        self.driver.find_element(By.XPATH, "//input[@value='כניסה']").click()
-
     def click_cup(self):
         self.driver.find_element(By.XPATH,self.cupons_button).click()
 
@@ -50,16 +44,17 @@ class DashboardPageFunc():
         util = Utilitis(self.driver)
         data = ["קופונים","הזמנות","מוצרים","מבצעים","חנויות","משתמשים"]
         for i in range(1,7):
-            for j in data:
-                if i == 2:
-                    continue
-                self.driver.find_element(By.XPATH,self.allnav.format(i)).click()
-                sleep(2)
-                x = util.get_text(DashboardLocators.text)
-                if x != j:
-                    return False
+            if i == 2:
+                continue
+            self.driver.find_element(By.XPATH,self.allnav.format(i)).click()
+            self.driver.implicitly_wait(5)
+            x = util.get_text(DashboardLocators.text)
+            if x != data[i+1]:
+                return False
+            else:
                 self.driver.back()
-                return True
+        return True
+
 
 
 

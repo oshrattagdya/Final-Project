@@ -16,7 +16,7 @@ class TestDashboard(Base):
         driver = self.driver
         dash = DashboardPageFunc(driver)
         util = Utilitis(driver)
-        dash.connect()
+        util.connect_home_page()
         x = dash.all_navbar()
         assert x == True
 

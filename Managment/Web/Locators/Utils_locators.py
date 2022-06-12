@@ -2,7 +2,7 @@
 
 class Utils_Locators:
     search_field = "(//input[@type='search'])[1]"
-    options_btn = "(//i[@class='fa fa-ellipsis-v icon_icon '])"
+    options_btn = ".fa.fa-ellipsis-v.icon_icon"
     add_btn = "(//span[contains(text(),'הוספה')])[1]"
     export_btn = "(//span[contains(text(),'ייצוא')])[1]"
     desc_boxs = "//input[@placeholder='תיאור']"
