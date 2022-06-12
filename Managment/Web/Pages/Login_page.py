@@ -11,8 +11,8 @@ class LoginPageFunc():
         self.button_login = Login_Locators.button_login
 
 
-    def JS_Message(self):
-        return self.driver.find_element(By.CSS_SELECTOR, self.phone_field).get_attribute('validationMessage')
+    # def JS_Message(self):
+        # return self.driver.find_element(By.CSS_SELECTOR, self.phone_field).get_attribute('validationMessage')
 
 
     def enter_phone(self,phone):
