@@ -8,3 +8,7 @@ class DashboardLocators:
     sells = "(//a[contains(@class,'dashboard_count')])[5]"
     stores = "(//a[contains(@class,'dashboard_count')])[6]"
     users = "(//a[contains(@class,'dashboard_count')])[7]"
+
+    allnav = "(//a[contains(@class,'dashboard_count')])[{}]"
+    #assert locators
+    text = "//main[1]/div[1]/div[1]/span[1]/h4"
