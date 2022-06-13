@@ -1,6 +1,7 @@
 """ Locators for Categories screen"""
 
 class CategoriesLocators:
+
     categories_nav_btn = "//nav[1]/div[2]/a[21]"
     search_categ_btn = "(//input[@type='search'])[1]"
     options = "(//i[@class='fa fa-ellipsis-v icon_icon '])"

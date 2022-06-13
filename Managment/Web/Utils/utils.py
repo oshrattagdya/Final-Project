@@ -1,5 +1,4 @@
 """ utils functions"""
-import pytest
 from selenium.webdriver import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -10,6 +9,7 @@ from selenium.webdriver.common.by import By
 from Managment.Web.Base.BasePage import Base
 from Managment.Web.Pages.Login_page import LoginPageFunc
 from selenium.webdriver.remote.webdriver import WebDriver
+
 class Utilitis():
 
     def __init__(self, driver:WebDriver):
