@@ -20,6 +20,9 @@ class Utilitis():
         self.table_res = Utils_Locators.table_res
         self.options_btn = Utils_Locators.options_btn
         self.add_btn = Utils_Locators.add_btn
+        self.options_btn = Utils_Locators.options_btn
+        self.add_btn = Utils_Locators.add_btn
+
 
     def select_result_amount(self,amount):
         WebDriverWait(self.driver, 10).until(
