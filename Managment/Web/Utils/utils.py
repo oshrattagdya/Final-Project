@@ -18,8 +18,8 @@ class Utilitis():
         self.res_amount = Utils_Locators.res_amount
         self.search_field = Utils_Locators.search_field
         self.table_res = Utils_Locators.table_res
-        self.phone_field = Login_Locators.phone_field
-
+        self.options_btn = Utils_Locators.options_btn
+        self.add_btn = Utils_Locators.add_btn
 
     def select_result_amount(self,amount):
         WebDriverWait(self.driver, 10).until(
@@ -64,3 +64,23 @@ class Utilitis():
 
     def JS_Message(self):
         return self.driver.find_element(By.CSS_SELECTOR, self.phone_field).get_attribute('validationMessage')
+
+    def addBtn(self):
+        self.driver.find_element(By.CSS_SELECTOR,Utils_Locators.options_btn).click()
+        self.driver.find_element(By.XPATH,Utils_Locators.add_btn).click()
+
+
+    def serche_input(self,value):
+        self.driver.find_element(By.XPATH, Utils_Locators.search_field).clear()
+        self.driver.find_element(By.XPATH,Utils_Locators.search_field).send_keys(value)
+        self.driver.find_element(By.XPATH,Utils_Locators.search_field).send_keys(Keys.ENTER)
+
+    def assertFunc(self, a, b):
+
+        driver = self.driver
+        try:
+            assert a == b
+        except Exception as e:
+            print('Error', format(e))
+            driver.get_screenshot_as_png()
+            driver.save_screenshot("Reports/png")
