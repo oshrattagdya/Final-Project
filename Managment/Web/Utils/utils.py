@@ -19,6 +19,7 @@ class Utilitis():
         self.options_btn = Utils_Locators.options_btn
         self.add_btn = Utils_Locators.add_btn
 
+
     def select_result_amount(self,amount):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME,self.pesent_res))
@@ -32,7 +33,7 @@ class Utilitis():
 
 
     def get_text(self,locator):
-        text = self.driver.find_element(By.XPATH, locator).text
+        text = self.driver.find_element(By.XPATH, locator).get_attribute("innerText")
         return text
 
 
@@ -62,7 +63,7 @@ class Utilitis():
 
 
 
-    def add_btn(self):
+    def add(self):
         self.driver.find_element(By.CSS_SELECTOR,Utils_Locators.options_btn).click()
         self.driver.find_element(By.XPATH,Utils_Locators.add_btn).click()
 
