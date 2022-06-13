@@ -74,10 +74,6 @@ class Utilitis():
         self.driver.find_element(By.XPATH,Utils_Locators.add_btn).click()
 
 
-    def serche_input(self,value):
-        self.driver.find_element(By.XPATH, Utils_Locators.search_field).clear()
-        self.driver.find_element(By.XPATH,Utils_Locators.search_field).send_keys(value)
-        self.driver.find_element(By.XPATH,Utils_Locators.search_field).send_keys(Keys.ENTER)
 
     def assertFunc(self, a, b):
 
