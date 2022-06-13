@@ -51,7 +51,7 @@ class TestUsers(Base):
         assert val == 'דוא״ל לא תקין'
         sleep(2)
 
-    def test_invalid_emailNull(self):
+    def test_phoneNull(self):
         driver = self.driver
         user = Userspagefunc(driver)
         util = Utilitis(driver)
