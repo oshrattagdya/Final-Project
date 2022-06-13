@@ -2,7 +2,7 @@
 from selenium.webdriver import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from Managment.Web.Locators.Login_locators import Login_Locators
 from ..Locators.Login_locators import Login_Locators
 from ..Locators.Utils_locators import Utils_Locators
 from selenium.webdriver.common.by import By
@@ -20,8 +20,7 @@ class Utilitis():
         self.table_res = Utils_Locators.table_res
         self.options_btn = Utils_Locators.options_btn
         self.add_btn = Utils_Locators.add_btn
-        self.options_btn = Utils_Locators.options_btn
-        self.add_btn = Utils_Locators.add_btn
+        self.phone_field = Login_Locators.phone_field
 
 
     def select_result_amount(self,amount):
@@ -51,6 +50,10 @@ class Utilitis():
         login.enter_phone_code('1234')
         login.click_on_button_login()
 
+
+    def JS_Message(self):
+        return self.driver.find_element(By.CSS_SELECTOR, self.phone_field).get_attribute('validationMessage')
+
     def search_box(self,name):
         self.name = name
 
@@ -65,8 +68,6 @@ class Utilitis():
             EC.presence_of_element_located((By.XPATH, self.table_res))
         ).click()
 
-    def JS_Message(self):
-        return self.driver.find_element(By.CSS_SELECTOR, self.phone_field).get_attribute('validationMessage')
 
     def addBtn(self):
         self.driver.find_element(By.CSS_SELECTOR,Utils_Locators.options_btn).click()
