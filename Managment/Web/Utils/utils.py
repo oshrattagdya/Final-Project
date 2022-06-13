@@ -1,13 +1,15 @@
 """ utils functions"""
-import pytest
 from selenium.webdriver import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from ..Locators.Login_locators import Login_Locators
 from ..Locators.Utils_locators import Utils_Locators
 from selenium.webdriver.common.by import By
 from Managment.Web.Base.BasePage import Base
 from Managment.Web.Pages.Login_page import LoginPageFunc
 from selenium.webdriver.remote.webdriver import WebDriver
+
 class Utilitis():
 
     def __init__(self, driver:WebDriver):
@@ -61,7 +63,8 @@ class Utilitis():
             EC.presence_of_element_located((By.XPATH, self.table_res))
         ).click()
 
-
+    def JS_Message(self):
+        return self.driver.find_element(By.CSS_SELECTOR, self.phone_field).get_attribute('validationMessage')
 
     def add(self):
         self.driver.find_element(By.CSS_SELECTOR,Utils_Locators.options_btn).click()

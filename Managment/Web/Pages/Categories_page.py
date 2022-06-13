@@ -4,6 +4,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from ..Locators.Categories_locators import CategoriesLocators
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
+
+
 class CategoriesPageFunc():
     def __init__(self,driver:WebDriver):
         self.driver = driver
