@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from selenium.webdriver.common.by import By
 from Managment.Web.Base.BasePage import Base
@@ -28,7 +30,6 @@ class TestLogin(Base):
         except Exception as e:
             driver.get_screenshot_as_png()
 
-
     """test 2"""
     def test_login_incorrectly_when_user_non_register(self):
         user = "//div[contains(text(),'no such user')]"
@@ -52,8 +53,9 @@ class TestLogin(Base):
         # assert login.JS_Message() == ''
         # login.enter_phone_code('1234')
         # login.click_on_button_login()
+        util = Utilitis(driver)
         try:
-            assert login.JS_Message() == 'זהו שדה חובה.'
+            assert util.JS_Message("input[placeholder='טלפון']") == 'זהו שדה חובה.'
         except Exception as e:
             driver.get_screenshot_as_png()
 
@@ -94,9 +96,11 @@ class TestLogin(Base):
         driver.implicitly_wait(10)
         login.click_on_button()
         driver.implicitly_wait(10)
-        # login.enter_phone_code('')
         login.click_on_button_login()
-        try:
-            assert login.JS_Message() == 'זהו שדה חובה.'
+        time.sleep(1)
+        util = Utilitis(driver)
+        x = util.JS_Message("input[placeholder='קוד']")
+        try :
+            assert x == 'זהו שדה חובה.'
         except Exception as e:
             driver.get_screenshot_as_png()
