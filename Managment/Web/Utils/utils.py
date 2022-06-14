@@ -42,16 +42,6 @@ class Utilitis():
         return text
 
 
-    def connect_home_page(self):
-
-        login = LoginPageFunc(self.driver)
-        login.enter_phone('1950000000')
-        self.driver.implicitly_wait(10)
-        login.click_on_button()
-        self.driver.implicitly_wait(10)
-        login.enter_phone_code('1234')
-        login.click_on_button_login()
-
 
     def valid_Message(self):
         return self.driver.find_element(By.CSS_SELECTOR, self.phone_field).get_attribute('validationMessage')
@@ -96,5 +86,8 @@ class Utilitis():
         search = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH,self.search_field)))
         search.send_keys(self.name)
         search.send_keys(Keys.RETURN)
+
+    def add_photo(self, pic):
+        self.driver.find_element(By.XPATH, self.phone_field).send_keys(pic)
 
 
