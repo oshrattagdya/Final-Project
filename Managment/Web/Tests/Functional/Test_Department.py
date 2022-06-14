@@ -40,7 +40,7 @@ class TestDepartment(Base):
         time.sleep(3)
         util.addBtn()
         # Using the "enter name" function
-        add.enter_name('קטל יד 3')
+        add.enter_name('תוספות')
         # Using the "add photo" function
         util.add_photo(r'''C:\Users\R.png''')
         # Using the "add background photo" function
@@ -49,10 +49,10 @@ class TestDepartment(Base):
         add.click_on_add_button()
         driver.implicitly_wait(2)
         # Using the "searchField" function
-        util.searchField('קטל יד 3')
+        util.searchField('תוספות')
         time.sleep(10)
         # Using the "assert" function
-        util.assertFunc(add.assertDepartment(True), 'קטל יד 3')
+        util.assertFunc(add.assertDepartment(True), 'תוספות')
 
     def test_Create_a_new_department_invalid_when_all_fields_are_null(self):
         # Reboots the driver
@@ -77,8 +77,6 @@ class TestDepartment(Base):
         driver = self.driver
         # Definition of a variable that uses the methods of the Utils class
         util = Utilitis(driver)
-        # Using the login function
-        util.connect_home_page()
         # Definition of a variable that uses the methods of the Department Page Func class
         add = DepartmentPageFunc(driver)
         # Using the click department button function
@@ -87,7 +85,7 @@ class TestDepartment(Base):
         # Using the "add button" function
         util.addBtn()
         # Using the "add photo" function
-        util.add_photo()
+        util.add_photo(r'''C:\Users\R.png''')
         # Using the "add background photo" function
         add.add_background_photo()
         # Using the "click on add button" function
@@ -101,8 +99,6 @@ class TestDepartment(Base):
         driver = self.driver
         # Definition of a variable that uses the methods of the Utils class
         util = Utilitis(driver)
-        # Using the login function
-        util.connect_home_page()
         # Definition of a variable that uses the methods of the Department Page Func class
         add = DepartmentPageFunc(driver)
         # Using the click department button function
@@ -111,16 +107,16 @@ class TestDepartment(Base):
         # Using the "add button" function
         util.addBtn()
         # Using the "enter name" function
-        add.enter_name()
+        add.enter_name('תכשיטים')
         # Using the "add background photo" function
         add.add_background_photo()
         # Using the "click on add button" function
         add.click_on_add_button()
         # Using the "searchField" function
-        util.searchField('סבוניםם')
+        util.searchField('תכשיטים')
         driver.implicitly_wait(10)
         # Using the "assert" function
-        util.assertFunc(add.assertDepartment(), 'סבוניםם')
+        util.assertFunc(add.assertDepartment(True), 'תכשיטים')
 
 
     def test_Create_a_new_department_correctly_when_a_Background_photo_field_is_null(self):
@@ -128,8 +124,6 @@ class TestDepartment(Base):
         driver = self.driver
         # Definition of a variable that uses the methods of the Utils class
         util = Utilitis(driver)
-        # Using the login function
-        util.connect_home_page()
         # Definition of a variable that uses the methods of the Department Page Func class
         add = DepartmentPageFunc(driver)
         # Using the click department button function
@@ -138,24 +132,24 @@ class TestDepartment(Base):
         # Using the "add button" function
         util.addBtn()
         # Using the "enter name" function
-        add.enter_name('שמפו')
+        add.enter_name('נעלים')
         # Using the "add photo" function
-        add.add_photo()
+        util.add_photo(r'''C:\Users\R.png''')
         # Using the "click on add button" function
         add.click_on_add_button()
         # Using the "searchField" function
-        util.searchField('שמפו')
+        util.searchField('נעלים')
+        time.sleep(3)
         driver.implicitly_wait(10)
         # Using the "assert" function
-        util.assertFunc(add.assertDepartment(True), 'סבוניםם')
+        util.assertFunc(add.assertDepartment(True), 'נעלים')
+        time.sleep(4)
 
     def test_Create_a_new_department_invalid_when_name_and_image_field_is_null(self):
         # Reboots the driver
         driver = self.driver
         # Definition of a variable that uses the methods of the Utils class
         util = Utilitis(driver)
-        # Using the login function
-        util.connect_home_page()
         # Definition of a variable that uses the methods of the Department Page Func class
         add = DepartmentPageFunc(driver)
         # Using the click department button function
@@ -176,8 +170,6 @@ class TestDepartment(Base):
         driver = self.driver
         # Definition of a variable that uses the methods of the Utils class
         util = Utilitis(driver)
-        # Using the login function
-        util.connect_home_page()
         # Definition of a variable that uses the methods of the Department Page Func class
         add = DepartmentPageFunc(driver)
         # Using the click department button function
@@ -186,14 +178,14 @@ class TestDepartment(Base):
         # Using the "add button" function
         util.addBtn()
         # Using the "enter name" function
-        add.enter_name('בישום')
+        add.enter_name('מסכות')
         # Using the "click on add button" function
         add.click_on_add_button()
         driver.implicitly_wait(10)
         # Using the "searchField" function
-        util.searchField('בישום')
+        util.searchField('מסכות')
         # Using the "assert" function
-        util.assertFunc(add.assertDepartment(True), 'בישום')
+        util.assertFunc(add.assertDepartment(True), 'מסכות')
         time.sleep(5)
 
     def test_Create_a_new_department_invalid_when_Background_photo_and_name_field_is_null(self):
@@ -201,8 +193,6 @@ class TestDepartment(Base):
         driver = self.driver
         # Definition of a variable that uses the methods of the Utils class
         util = Utilitis(driver)
-        # Using the login function
-        util.connect_home_page()
         # Definition of a variable that uses the methods of the Department Page Func class
         add = DepartmentPageFunc(driver)
         # Using the click department button function
@@ -211,7 +201,7 @@ class TestDepartment(Base):
         # Using the "add button" function
         util.addBtn()
         # Using the "add photo" function
-        add.add_photo()
+        util.add_photo(r'''C:\Users\R.png''')
         # Using the "click on add button" function
         add.click_on_add_button()
         driver.implicitly_wait(10)
@@ -224,8 +214,6 @@ class TestDepartment(Base):
         driver = self.driver
         # Definition of a variable that uses the methods of the Utils class
         util = Utilitis(driver)
-        # Using the login function
-        util.connect_home_page()
         # Definition of a variable that uses the methods of the Department Page Func class
         add = DepartmentPageFunc(driver)
         # Using the click department button function
@@ -234,35 +222,23 @@ class TestDepartment(Base):
         # Using the "searchField" function
         util.searchField('חלב')
         # Using the "assert" function
-        util.assertFunc(add.searchIdentifier(),'461hdlknbycfhy')
+        util.assertFunc(add.searchIdentifier(), '461hdlknbycfhy')
 
     def test_Search_properly_when_products_are_available(self):
-        # Reboots the driver
         driver = self.driver
-        # Definition of a variable that uses the methods of the Utils class
-        util = Utilitis(driver)
-        # Using the login function
-        util.connect_home_page()
-        # Definition of a variable that uses the methods of the Department Page Func class
         add = DepartmentPageFunc(driver)
         # Using the click department button function
         add.click_department_button()
-        time.sleep(2)
-        b = []
-        a = driver.find_element(By.CSS_SELECTOR,".table_table").get_attribute('innerText')
-        b.append(a)
-        print(b)
-        # Using the "searchField" function
-       # util.searchField('חלב')
-       # util.assertFunc(add.searchIdentifier(),'461hdlknbycfhy')
+        # sleep
+        time.sleep(3)
+        util = Utilitis(driver)
+        util.secachItemValidation()
 
     def test_Invalid_search_when_Identifier_incorrect(self):
         # Reboots the driver
         driver = self.driver
         # Definition of a variable that uses the methods of the Utils class
         util = Utilitis(driver)
-        # Using the login function
-        util.connect_home_page()
         # Definition of a variable that uses the methods of the Department Page Func class
         add = DepartmentPageFunc(driver)
         # Using the click department button function
@@ -424,6 +400,28 @@ class TestDepartment(Base):
         time.sleep(5)
         # Using the "assert" function
         util.assertFunc(add.assertDepartment(False), 'מוצרי טיפוח')
+
+    def test(self):
+        driver = self.driver
+        add = DepartmentPageFunc(driver)
+        # Using the click department button function
+        add.click_department_button()
+        # sleep
+        time.sleep(3)
+        util = Utilitis(driver)
+        util.secachItemValidation()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

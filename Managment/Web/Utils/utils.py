@@ -1,6 +1,7 @@
 """ utils functions"""
 from selenium.webdriver import Keys
 import allure
+import time
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from Managment.Web.Locators.Login_locators import Login_Locators
@@ -84,10 +85,27 @@ class Utilitis():
     def searchField(self,name):
         self.name = name
         search = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH,self.search_field)))
+        search.clear()
         search.send_keys(self.name)
         search.send_keys(Keys.RETURN)
 
     def add_photo(self,url):
         self.driver.find_element(By.XPATH, self.photo_field).send_keys(f'''{url}''')
+
+
+    def secachItemValidation(self):
+        driver = self.driver
+        util = Utilitis(driver)
+        item = []
+        for i in range(1,10+1):
+            a = self.driver.find_element(By.CSS_SELECTOR,f"tbody tr:nth-child({i}) td:nth-child(2)")
+            print(a.text)
+            item.append(f'{a.text}')
+        print(item)
+        for j in item:
+            util.searchField(j)
+            time.sleep(6)
+            assert j == util.get_text("//table[1]/tbody[1]/tr[1]/td[2]")
+            print(f" {j} is correct")
 
 
