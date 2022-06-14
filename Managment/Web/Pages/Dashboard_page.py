@@ -42,14 +42,17 @@ class DashboardPageFunc():
 
     def all_navbar(self):
         util = Utilitis(self.driver)
-        data = ["קופונים","הזמנות","מוצרים","מבצעים","חנויות","משתמשים"]
         for i in range(1,7):
+            data = "//body/div[@id='root']/div[1]/div[2]/main[1]/div[2]/div[1]/div[1]/a[{}]/span[1]"
             if i == 2:
                 continue
             self.driver.find_element(By.XPATH,self.allnav.format(i)).click()
-            self.driver.implicitly_wait(5)
+            sleep(3)
             x = util.get_text(DashboardLocators.text)
-            if x != data[i+1]:
+            self.driver.implicitly_wait(5)
+            u = self.driver.find_element(By.XPATH,data.format(i)).text
+            print(u)
+            if x != u:
                 return False
             else:
                 self.driver.back()

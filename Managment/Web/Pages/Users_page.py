@@ -48,6 +48,10 @@ class Userspagefunc():
         options = self.driver.find_element(By.XPATH, self.store_ops.format(op))
         options.click()
 
+
+    def store_option_click(self, op):
+        self.driver.find_element(By.XPATH, self.store).click()
+
     def add_btn(self):
         self.driver.find_element(By.XPATH,self.btnadd).click()
 

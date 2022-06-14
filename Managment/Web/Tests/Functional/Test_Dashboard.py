@@ -17,24 +17,29 @@ class TestDashboard(Base):
         dash = DashboardPageFunc(driver)
         util = Utilitis(driver)
         util.connect_home_page()
-        x = dash.all_navbar()
-        assert x == True
-
-        # dash.click_cup()
-        # text_cupon = util.get_text(DashboardLocators.text)
-        # assert text_cupon == "קופונים"
-        # driver.back()
-        # dash.orders_click()
-        # order = util.get_text(DashboardLocators.text)
-        # assert order == "הזמנות"
-        # driver.back()
-        # dash.products_click()
-        # prod = util.get_text(DashboardLocators.text)
-        # assert prod == "מוצרים"
-        # driver.back()
-        # dash.sells_click()
-        # sel = util.get_text(DashboardLocators.text)
-        # assert sel == "מבצעים"
+        dash.click_cup()
+        text_cupon = util.get_text(DashboardLocators.text)
+        assert text_cupon == "קופונים"
+        driver.back()
+        dash.orders_click()
+        order = util.get_text(DashboardLocators.text)
+        assert order == "הזמנות"
+        driver.back()
+        dash.products_click()
+        prod = util.get_text(DashboardLocators.text)
+        assert prod == "מוצרים"
+        driver.back()
+        dash.sells_click()
+        sel = util.get_text(DashboardLocators.text)
+        assert sel == "מבצעים"
+        driver.back()
+        dash.stores_click()
+        store = util.get_text(DashboardLocators.text)
+        assert store == "חנויות"
+        driver.back()
+        dash.users_click()
+        user = util.get_text(DashboardLocators.text)
+        assert user == "משתמשים"
 
 
 

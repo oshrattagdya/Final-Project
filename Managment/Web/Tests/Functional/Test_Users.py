@@ -20,15 +20,15 @@ class TestUsers(Base):
         driver.implicitly_wait(10)
         user.userpage_btn()
         sleep(2)
-        util.add()
+        util.addBtn()
         user.addname("avi")
         user.addlastname("jambar")
-        user.addemil("j@j.com")
-        user.addphone("195222223")
+        user.addemil("j@jd.com")
+        user.addphone("195222224")
         user.store_option("dddd")
         user.add_btn()
         val = user.get_text(user.varify,"avi")
-        assert val == "avi"
+        util.assertFunc(val,"avi")
         sleep(2)
 
 
@@ -40,7 +40,7 @@ class TestUsers(Base):
         driver.implicitly_wait(10)
         user.userpage_btn()
         sleep(2)
-        util.add()
+        util.addBtn()
         user.addname("sd")
         user.addlastname("jambar")
         user.addemil("")
@@ -48,7 +48,7 @@ class TestUsers(Base):
         user.store_option("dddd")
         user.add_btn()
         val = util.get_text("//div[contains(text(),'דוא״ל לא תקין')]")
-        assert val == 'דוא״ל לא תקין'
+        util.assertFunc(val ,'דוא״ל לא תקין')
         sleep(2)
 
     def test_phoneNull(self):
@@ -59,7 +59,7 @@ class TestUsers(Base):
         driver.implicitly_wait(10)
         user.userpage_btn()
         sleep(2)
-        util.add()
+        util.addBtn()
         user.addname("sd")
         user.addlastname("jambar")
         user.addemil("d@j.com")
@@ -67,5 +67,23 @@ class TestUsers(Base):
         user.store_option("dddd")
         user.add_btn()
         val = util.get_text("//div[contains(text(),'מס׳ טלפון לא תקין')]")
-        assert val == "מס׳ טלפון לא תקין"
+        util.assertFunc(val ,'מס׳ טלפון לא תקין')
+
+
+    def test_storeNull(self):
+        driver = self.driver
+        user = Userspagefunc(driver)
+        util = Utilitis(driver)
+        util.connect_home_page()
+        driver.implicitly_wait(10)
+        user.userpage_btn()
         sleep(2)
+        util.addBtn()
+        user.addname("sd")
+        user.addlastname("jambar")
+        user.addemil("d@j.com")
+        user.addphone("195222225")
+        user.store_option_click('')
+        user.add_btn()
+        val = util.get_text("//div[contains(text(),'נא למלא שדה זה')]")
+        util.assertFunc(val ,'נא למלא שדה זה')

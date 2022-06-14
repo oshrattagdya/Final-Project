@@ -9,3 +9,6 @@ class Utils_Locators:
     present_res = "paging_select"
     res_amount = "//div[normalize-space()='{}']"
     table_res = "//table[1]/tbody[1]/tr[1]"
+
+
+    dan = "/Users/dnylgmbr/Desktop/Final-Project/Managment/Web/Reports/shottt.png"
