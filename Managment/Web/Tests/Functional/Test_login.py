@@ -55,7 +55,7 @@ class TestLogin(Base):
         # login.click_on_button_login()
         util = Utilitis(driver)
         try:
-            assert util.JS_Message("input[placeholder='טלפון']") == 'זהו שדה חובה.'
+            assert util.valid_Message("input[placeholder='טלפון']") == 'זהו שדה חובה.'
         except Exception as e:
             driver.get_screenshot_as_png()
 

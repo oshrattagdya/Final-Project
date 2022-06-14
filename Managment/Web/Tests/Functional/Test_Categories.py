@@ -5,14 +5,13 @@ from Managment.Web.Base.BasePage import Base
 from Managment.Web.Pages.Categories_page import CategoriesPageFunc
 # from Managment.Web.Utils.utils import
 
-@pytest.mark.usefixtures('set_up')
+@pytest.mark.usefixtures('connect_home_page')
 class TestCategories(Base):
     """test 1"""
     def test_add_new_category_to_my_store_correctly(self):
         driver = self.driver
         #using a func to connect the site
         util = Utilitis(driver)
-        util.connect_home_page()
         category = CategoriesPageFunc(driver)
         time.sleep(2)
         #entering the categories page
@@ -20,13 +19,13 @@ class TestCategories(Base):
 
         #clicking on adding a category
         util.addBtn()
-        time.sleep()
+        time.sleep(2)
         driver.implicitly_wait(10)
 
         #insert category name
         category.click_status_active_op()
         time.sleep(3)
-        category.insert_new_category_name("גרבר")
+        category.insert_new_category_name("גרב")
         driver.implicitly_wait(10)
 
         #insert department name
@@ -34,7 +33,7 @@ class TestCategories(Base):
         driver.implicitly_wait(10)
 
         #insert name field
-        category.insert_field_name("גרבר")
+        category.insert_field_name("גרב")
         driver.implicitly_wait(10)
 
         #select type
@@ -45,7 +44,7 @@ class TestCategories(Base):
         category.click_on_category_add_button()
         time.sleep(3)
         driver.implicitly_wait(2)
-        util.assertFunc(category.get_text_name(),"גרבר")
+        util.assertFunc(category.get_text_name(),"גרב")
         util.assertFunc(category.get_text_dep(),"קוניאק")
 
     """test 2"""
@@ -53,7 +52,7 @@ class TestCategories(Base):
         driver = self.driver
         # using a func to connect the site
         util = Utilitis(driver)
-        util.connect_home_page()
+        # util.connect_home_page()
         category = CategoriesPageFunc(driver)
         driver.implicitly_wait(10)
 
@@ -93,43 +92,95 @@ class TestCategories(Base):
 
     """test 3"""
     def test_add_new_category_to_my_store_incorrectly_when_category_field_null(self):
+
         driver = self.driver
         #using a func to connect the site
         util = Utilitis(driver)
-        util.connect_home_page()
         category = CategoriesPageFunc(driver)
         time.sleep(2)
         #entering the categories page
         category.click_categories_navbar()
 
         #clicking on adding a category
+        time.sleep(2)
         util.addBtn()
-        time.sleep()
+        time.sleep(2)
         driver.implicitly_wait(10)
 
         #insert category name
         category.click_status_active_op()
         time.sleep(3)
-        category.insert_new_category_name("גרבר")
+        category.insert_new_category_name("גרב")
         driver.implicitly_wait(10)
 
-        #insert department name
-        # category.insert_department_name("קוניאק")
-        # driver.implicitly_wait(10)
+        #insert category name
+        category.click_status_active_op()
+        time.sleep(5)
+        category.insert_new_category_name("גרב")
+
+        # insert department name
+        # category.insert_department_name("")
 
         #insert name field
-        category.insert_field_name("גרבר")
-        driver.implicitly_wait(10)
+        category.insert_field_name("גרב")
 
         #select type
         category.type_option("טקסט")
-        driver.implicitly_wait(10)
 
         #click on add
         category.click_on_category_add_button()
-        time.sleep(3)
+        category.click_none()
         driver.implicitly_wait(2)
-        util.assertFunc(util.JS_Message("//input[contains(@placeholder,'מחלקות')]"),'זהו שדה חובה.')
+        time.sleep(4)
+        a = util.get_text("//div[contains(@class,'formItem_departmentIds')]//div[contains(@class,'form_note')][contains(text(),'נא למלא שדה זה')]")
+        util.assertFunc(a,"נא למלא שדה זה")
+
+
+    """test 4"""
+
+    def test_add_new_category_to_my_store_incorrectly_when_second_name_field_null(self):
+        driver = self.driver
+        # using a func to connect the site
+        util = Utilitis(driver)
+        category = CategoriesPageFunc(driver)
+        time.sleep(2)
+        # entering the categories page
+        category.click_categories_navbar()
+
+        # clicking on adding a category
+        util.addBtn()
+        time.sleep(2)
+        driver.implicitly_wait(10)
+
+        # insert category name
+        category.click_status_active_op()
+        time.sleep(3)
+        category.insert_new_category_name("גרב")
+        driver.implicitly_wait(10)
+
+        # insert department name
+        category.insert_department_name("קוניאק")
+        # driver.implicitly_wait(10)
+
+        # # insert name field
+        # category.insert_field_name("גרב")
+        # driver.implicitly_wait(10)
+
+        # select type
+        category.type_option("טקסט")
+        time.sleep(5)
+        # click on add
+        category.click_on_category_add_button()
+        time.sleep(7)
+        driver.implicitly_wait(2)
+        # a = util.valid_Message("//div[contains(@class,'formItem_name')]//div[contains(@class,'form_note')][normalize-space()='']")
+        print(a)
+        try:
+            assert util.valid_Message("//div[contains(@class,'formItem_name')]//div[contains(@class,'form_note')][normalize-space()='']") == 'זהו שדה חובה.'
+        except Exception as e:
+            driver.get_screenshot_as_png()
+        # util.assertFunc( a ,"נא למלא שדה זה")
+
 
 
 

@@ -45,8 +45,8 @@ class Utilitis():
 
 
 
-    def valid_Message(self):
-        return self.driver.find_element(By.CSS_SELECTOR, self.phone_field).get_attribute('validationMessage')
+    def valid_Message(self,field):
+        return self.driver.find_element(By.CSS_SELECTOR, self.field).get_attribute('validationMessage')
 
     def search_box(self,name):
         self.name = name
