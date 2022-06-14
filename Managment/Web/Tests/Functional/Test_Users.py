@@ -35,7 +35,6 @@ class TestUsers(Base):
         driver = self.driver
         user = Userspagefunc(driver)
         util = Utilitis(driver)
-        util.connect_home_page()
         driver.implicitly_wait(10)
         user.userpage_btn()
         sleep(2)
@@ -122,14 +121,6 @@ class TestUsers(Base):
         util.assertFunc(emil,"0549703147")
 
 
-    def test_serch_User_store(self):
-        driver = self.driver
-        user = Userspagefunc(driver)
-        util = Utilitis(driver)
-        driver.implicitly_wait(10)
-        user.userpage_btn()
-        util.searchField("sdff")
-        emil = util.get_text("//tbody/tr[1]/td[5]")
-        util.assertFunc(emil,"sdff")
+
 
 

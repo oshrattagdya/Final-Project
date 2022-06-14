@@ -1,3 +1,4 @@
+import allure
 import pytest
 from selenium.webdriver.common.by import By
 from Managment.Web.Base.BasePage import Base
