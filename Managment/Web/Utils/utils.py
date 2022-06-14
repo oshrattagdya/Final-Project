@@ -74,8 +74,8 @@ class Utilitis():
             assert a == b
         except Exception as e:
             print('Error', format(e))
-            driver.get_screenshot_as_png()
-            driver.save_screenshot("./Managment/Web/Reports//save_screenshot.png")
+            raise allure.attach(self.driver.get_screenshot_as_png(), self.driver.save_screenshot("screenshot"),
+                                attachment_type=AttachmentType.PNG)
 
     def exportBtn(self):
         self.driver.find_element(By.CSS_SELECTOR,Utils_Locators.options_btn).click()

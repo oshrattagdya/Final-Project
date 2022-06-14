@@ -17,7 +17,6 @@ class TestDashboard(Base):
         driver = self.driver
         dash = DashboardPageFunc(driver)
         util = Utilitis(driver)
-        util.connect_home_page()
         dash.click_cup()
         text_cupon = util.get_text(DashboardLocators.text)
         assert text_cupon == "קופונים"
