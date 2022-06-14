@@ -9,22 +9,21 @@ from time import sleep
 
 
 
-@pytest.mark.usefixtures('set_up')
+@pytest.mark.usefixtures('connect_home_page')
 class TestUsers(Base):
 
     def test_valid_addUser(self):
         driver = self.driver
         user = Userspagefunc(driver)
         util = Utilitis(driver)
-        util.connect_home_page()
         driver.implicitly_wait(10)
         user.userpage_btn()
         sleep(2)
         util.addBtn()
         user.addname("avi")
         user.addlastname("jambar")
-        user.addemil("j@jd.com")
-        user.addphone("195222224")
+        user.addemil("j@jdd.com")
+        user.addphone("195222225")
         user.store_option("dddd")
         user.add_btn()
         val = user.get_text(user.varify,"avi")
@@ -55,7 +54,6 @@ class TestUsers(Base):
         driver = self.driver
         user = Userspagefunc(driver)
         util = Utilitis(driver)
-        util.connect_home_page()
         driver.implicitly_wait(10)
         user.userpage_btn()
         sleep(2)
@@ -74,7 +72,6 @@ class TestUsers(Base):
         driver = self.driver
         user = Userspagefunc(driver)
         util = Utilitis(driver)
-        util.connect_home_page()
         driver.implicitly_wait(10)
         user.userpage_btn()
         sleep(2)
@@ -87,3 +84,52 @@ class TestUsers(Base):
         user.add_btn()
         val = util.get_text("//div[contains(text(),'נא למלא שדה זה')]")
         util.assertFunc(val ,'נא למלא שדה זה')
+
+
+    def test_serch_User_name(self):
+        driver = self.driver
+        user = Userspagefunc(driver)
+        util = Utilitis(driver)
+        driver.implicitly_wait(10)
+        user.userpage_btn()
+        util.search_box("יונתן")
+        name = util.get_text("//tbody/tr[1]/td[1]")
+        util.assertFunc(name,"יונתן")
+
+
+    def test_serch_User_lastname(self):
+        driver = self.driver
+        user = Userspagefunc(driver)
+        util = Utilitis(driver)
+        driver.implicitly_wait(10)
+        user.userpage_btn()
+        util.search_box("אלמיהו")
+        emil = util.get_text("//tbody/tr[1]/td[2]")
+        print(emil)
+        util.assertFunc(emil,"אלמיהו")
+
+
+
+    def test_serch_User_phone(self):
+        driver = self.driver
+        user = Userspagefunc(driver)
+        util = Utilitis(driver)
+        driver.implicitly_wait(10)
+        user.userpage_btn()
+        util.search_box("0549703147")
+        emil = util.get_text("//tbody/tr[1]/td[4]")
+        print(emil)
+        util.assertFunc(emil,"0549703147")
+
+
+    def test_serch_User_store(self):
+        driver = self.driver
+        user = Userspagefunc(driver)
+        util = Utilitis(driver)
+        driver.implicitly_wait(10)
+        user.userpage_btn()
+        util.searchField("sdff")
+        emil = util.get_text("//tbody/tr[1]/td[5]")
+        util.assertFunc(emil,"sdff")
+
+
