@@ -87,7 +87,7 @@ class Utilitis():
         search.send_keys(self.name)
         search.send_keys(Keys.RETURN)
 
-    def add_photo(self):
-        self.driver.find_element(By.XPATH, self.photo_field).send_keys(r'''C:\Users\logo-linkedin-4096.png''')
+    def add_photo(self,url):
+        self.driver.find_element(By.XPATH, self.photo_field).send_keys(f'''{url}''')
 
 
