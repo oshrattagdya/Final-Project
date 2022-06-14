@@ -71,11 +71,11 @@ class ProductsPageFunc():
         self.barcode_data = barcode_data
         self.product_name = product_name
         self.product_price_data = product_price_data
-        self.driver.find_element(By.XPATH, self.barcode_field).send_keys(self.barcode_data)
+        self.driver.find_element(By.CSS_SELECTOR, self.barcode_field).send_keys(self.barcode_data)
 
-        self.driver.find_element(By.XPATH, self.product_name_field).send_keys(self.product_name)
+        self.driver.find_element(By.CSS_SELECTOR, self.product_name_field).send_keys(self.product_name)
 
-        self.driver.find_element(By.XPATH, self.product_price).send_keys(self.product_price_data)
+        self.driver.find_element(By.CSS_SELECTOR, self.product_price).send_keys(self.product_price_data)
 
 
 
@@ -85,13 +85,13 @@ class ProductsPageFunc():
 
     def insert_expiration_date(self,expiration_date):
         self.expiration_date= expiration_date
-        date = self.driver.find_element(By.XPATH, self.date_field)
+        date = self.driver.find_element(By.CSS_SELECTOR, self.date_field)
         date.clear()
         date.send_keys(self.expiration_date)
 
 
     def category_option(self,op):
-        self.driver.find_element(By.XPATH,self.cate_btn).click()
+        self.driver.find_element(By.CSS_SELECTOR,self.cate_btn).click()
 
         options = self.driver.find_element(By.XPATH,self.cate_op.format(op))
         options.click()
@@ -115,7 +115,7 @@ class ProductsPageFunc():
 
 
     def store_option(self,op):
-        self.driver.find_element(By.XPATH,self.store_btn).click()
+        self.driver.find_element(By.CSS_SELECTOR,self.store_btn).click()
 
         options = self.driver.find_element(By.XPATH,self.store_op.format(op))
         options.click()
