@@ -42,9 +42,19 @@ class Utilitis():
         return text
 
 
+    def connect_home_page(self):
 
-    def JS_Message(self):
-        return self.driver.find_element(By.CSS_SELECTOR, self.phone_field).get_attribute('validationMessage')
+        login = LoginPageFunc(self.driver)
+        login.enter_phone('1950000000')
+        self.driver.implicitly_wait(10)
+        login.click_on_button()
+        self.driver.implicitly_wait(10)
+        login.enter_phone_code('1234')
+        login.click_on_button_login()
+
+
+    def JS_Message(self,field):
+        return self.driver.find_element(By.CSS_SELECTOR,field).get_attribute('validationMessage')
 
     def search_box(self,name):
         self.name = name
