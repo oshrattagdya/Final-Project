@@ -21,6 +21,7 @@ class Utilitis():
         self.options_btn = Utils_Locators.options_btn
         self.add_btn = Utils_Locators.add_btn
         self.phone_field = Login_Locators.phone_field
+        self.export_btn = Utils_Locators.export_btn
 
 
     def select_result_amount(self,amount):
@@ -58,15 +59,13 @@ class Utilitis():
         self.name = name
 
         search = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH,self.search_field))
-        )
+            EC.presence_of_element_located((By.XPATH,self.search_field)))
 
         search.send_keys(self.name)
         search.send_keys(Keys.RETURN)
 
         WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, self.table_res))
-        ).click()
+            EC.presence_of_element_located((By.XPATH, self.table_res))).click()
 
 
     def addBtn(self):
@@ -83,4 +82,16 @@ class Utilitis():
         except Exception as e:
             print('Error', format(e))
             driver.get_screenshot_as_png()
-            driver.save_screenshot("Reports/png")
+            driver.save_screenshot("./Managment/Web/Reports//save_screenshot.png")
+
+    def exportBtn(self):
+        self.driver.find_element(By.CSS_SELECTOR,Utils_Locators.options_btn).click()
+        self.driver.find_element(By.XPATH,Utils_Locators.export_btn).click()
+
+    def searchField(self,name):
+        self.name = name
+        search = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH,self.search_field)))
+        search.send_keys(self.name)
+        search.send_keys(Keys.RETURN)
+
+
