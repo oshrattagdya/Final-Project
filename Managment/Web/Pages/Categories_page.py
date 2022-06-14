@@ -25,6 +25,8 @@ class CategoriesPageFunc():
         self.assert_dep = CategoriesLocators.assert_dep
         self.required_message_name = CategoriesLocators.required_message_name
         self.ab = "//label[contains(text(),'שדות')]"
+        self.required_message_second_name_field = CategoriesLocators.required_message_second_name_field
+        self.required_message_type_field = CategoriesLocators.required_message_type_field
 
 
     def click_categories_navbar(self):
@@ -92,6 +94,13 @@ class CategoriesPageFunc():
 
     def click_none(self):
         self.driver.find_element(By.XPATH,self.ab).click()
+
+    def get_required_message_second_name_field(self):
+        return self.driver.find_element(By.XPATH,self.required_message_second_name_field).get_attribute("innerText")
+
+
+    def get_required_message_type_field(self):
+        return self.driver.find_element(By.XPATH,self.required_message_type_field).get_attribute("innerText")
 
 
 
