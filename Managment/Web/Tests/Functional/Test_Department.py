@@ -146,16 +146,16 @@ class TestDepartment(Base):
         # Using the "add button" function
         util.addBtn()
         # Using the "enter name" function
-        add.enter_name()
+        add.enter_name('שמפו')
         # Using the "add photo" function
         add.add_photo()
         # Using the "click on add button" function
         add.click_on_add_button()
         # Using the "searchField" function
-        util.searchField('סבוניםם')
+        util.searchField('שמפו')
         driver.implicitly_wait(10)
         # Using the "assert" function
-        util.assertFunc(add.assertDepartment(), 'סבוניםם')
+        util.assertFunc(add.assertDepartment(True), 'סבוניםם')
 
     def test_Create_a_new_department_invalid_when_name_and_image_field_is_null(self):
         # Reboots the driver
@@ -194,14 +194,15 @@ class TestDepartment(Base):
         # Using the "add button" function
         util.addBtn()
         # Using the "enter name" function
-        add.enter_name()
+        add.enter_name('בישום')
         # Using the "click on add button" function
         add.click_on_add_button()
         driver.implicitly_wait(10)
         # Using the "searchField" function
-        util.searchField('סבון')
+        util.searchField('בישום')
         # Using the "assert" function
-        util.assertFunc(add.assertDepartment(), 'סבון')
+        util.assertFunc(add.assertDepartment(True), 'בישום')
+        time.sleep(5)
 
     def test_Create_a_new_department_invalid_when_Background_photo_and_name_field_is_null(self):
         # Reboots the driver
@@ -332,21 +333,108 @@ class TestDepartment(Base):
         util.assertFunc(add.ui_txt_for_menu_bar(),"מחלקות")
 
         """Tests for Department updates"""
-        def test_Update_all_fields_properly_in_active_mode(self):
-            # Reboots the driver
-            driver = self.driver
-            # Definition of a variable that uses the methods of the Utils class
-            util = Utilitis(driver)
-            # Using the login function
-            util.connect_home_page()
-            # Definition of a variable that uses the methods of the Department Page Func class
-            add = DepartmentPageFunc(driver)
-            # Using the click department button function
-            add.click_department_button()
-            # sleep
-            time.sleep(3)
-            # Using the "assert" function
-            util.assertFunc(add.ui_txt_for_menu_bar(), "מחלקות")
+    def test_Update_all_fields_properly_in_active_mode(self):
+        # Reboots the driver
+        driver = self.driver
+        # Definition of a variable that uses the methods of the Utils class
+        util = Utilitis(driver)
+        # Using the login function
+        util.connect_home_page()
+        # Definition of a variable that uses the methods of the Department Page Func class
+        add = DepartmentPageFunc(driver)
+        # Using the click department button function
+        add.click_department_button()
+        # sleep
+        time.sleep(3)
+        add.click_on_department()
+        time.sleep(4)
+        # Using the "click_on_active_button" function
+        add.click_on_active_button()
+        # Using the "enter name" function
+        add.enter_name("מוצרי טיפוח")
+        # Using the "add photo" function
+        add.add_photo(r'''C:\Users\R.png''')
+        # Using the "add background photo" function
+        add.add_background_photo(r'''C:\Users\R.png''')
+        # Using the "click on update button" function
+        add.click_on_update_button()
+        # Using the "assert" function
+        util.assertFunc(add.assertDepartment(False),'מוצרי טיפוח')
+
+    def test_Update_all_fields_properly_in_inactive_mode(self):
+        # Reboots the driver
+        driver = self.driver
+        # Definition of a variable that uses the methods of the Utils class
+        util = Utilitis(driver)
+        # Using the login function
+        util.connect_home_page()
+        # Definition of a variable that uses the methods of the Department Page Func class
+        add = DepartmentPageFunc(driver)
+        # Using the click department button function
+        add.click_department_button()
+        # sleep
+        time.sleep(3)
+        add.click_on_department()
+        time.sleep(4)
+        # Using the "enter name" function
+        add.enter_name("מוצרי טיפוח")
+        # Using the "add photo" function
+        add.add_photo(r'''C:\Users\R.png''')
+        # Using the "add background photo" function
+        add.add_background_photo(r'''C:\Users\R.png''')
+        # Using the "click on update button" function
+        add.click_on_update_button()
+        # Using the "assert" function
+        util.assertFunc(add.assertDepartment(False), 'מוצרי טיפוח')
+
+    def  test_Update_properly_when_an_update_is_made_only_in_the_Name_field(self):
+        # Reboots the driver
+        driver = self.driver
+        # Definition of a variable that uses the methods of the Utils class
+        util = Utilitis(driver)
+        # Using the login function
+        util.connect_home_page()
+        # Definition of a variable that uses the methods of the Department Page Func class
+        add = DepartmentPageFunc(driver)
+        # Using the click department button function
+        add.click_department_button()
+        # sleep
+        time.sleep(3)
+        add.click_on_department()
+        time.sleep(4)
+        # Using the "add photo" function
+        add.add_photo()
+        # Using the "add background photo" function
+        add.add_background_photo()
+        # Using the "click on update button" function
+        add.click_on_update_button()
+        time.sleep(5)
+        # Using the "assert" function
+        util.assertFunc(add.assert_img_src(), r'''"C:\Users\logo-linkedin-4096.png"''')
+
+    def test_Update_properly_when_no_update_is_made(self):
+        # Reboots the driver
+        driver = self.driver
+        # Definition of a variable that uses the methods of the Utils class
+        util = Utilitis(driver)
+        # Using the login function
+        util.connect_home_page()
+        # Definition of a variable that uses the methods of the Department Page Func class
+        add = DepartmentPageFunc(driver)
+        # Using the click department button function
+        add.click_department_button()
+        # sleep
+        time.sleep(3)
+        add.click_on_department()
+        time.sleep(4)
+        # Using the "click on update button" function
+        add.click_on_update_button()
+        time.sleep(5)
+        # Using the "assert" function
+        util.assertFunc(add.assertDepartment(False), 'מוצרי טיפוח')
+
+
+
 
 
 
