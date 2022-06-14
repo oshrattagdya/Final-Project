@@ -22,6 +22,7 @@ class Utilitis():
         self.add_btn = Utils_Locators.add_btn
         self.phone_field = Login_Locators.phone_field
         self.export_btn = Utils_Locators.export_btn
+        self.photo_field = Utils_Locators.photo_field
 
 
     def select_result_amount(self,amount):
@@ -84,7 +85,7 @@ class Utilitis():
         search.send_keys(self.name)
         search.send_keys(Keys.RETURN)
 
-    def add_photo(self, pic):
-        self.driver.find_element(By.XPATH, self.phone_field).send_keys(pic)
+    def add_photo(self):
+        self.driver.find_element(By.XPATH, self.photo_field).send_keys(r'''C:\Users\logo-linkedin-4096.png''')
 
 

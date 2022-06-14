@@ -9,5 +9,5 @@ class Utils_Locators:
     present_res = "paging_select"
     res_amount = "//div[normalize-space()='{}']"
     table_res = "//table[1]/tbody[1]/tr[1]"
-    phone_field = "(//input[contains(@type,'file')])[1]"
+    photo_field = "(//input[contains(@type,'file')])[1]"
 

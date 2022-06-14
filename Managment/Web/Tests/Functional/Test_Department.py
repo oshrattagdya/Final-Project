@@ -9,7 +9,7 @@ from Managment.Web.Utils.utils import Utilitis
 import pyautogui
 
 
-@pytest.mark.usefixtures('set_up')
+@pytest.mark.usefixtures('connect_home_page')
 class TestDepartment(Base):
 
     """Test for department export"""
@@ -18,8 +18,6 @@ class TestDepartment(Base):
         driver = self.driver
         # Definition of a variable that uses the methods of the Utils class
         util = Utilitis(driver)
-        # Using the login function
-        util.connect_home_page()
         # Definition of a variable that uses the methods of the Department Page Func class
         add = DepartmentPageFunc(driver)
         # Using the click department button function
@@ -35,8 +33,6 @@ class TestDepartment(Base):
         driver = self.driver
         # Definition of a variable that uses the methods of the Utils class
         util = Utilitis(driver)
-        # Using the login function
-        util.connect_home_page()
         # Definition of a variable that uses the methods of the Department Page Func class
         add = DepartmentPageFunc(driver)
         # Using the click department button function
@@ -46,19 +42,19 @@ class TestDepartment(Base):
         time.sleep(3)
         util.addBtn()
         # Using the "enter name" function
-        add.enter_name()
+        add.enter_name('שמפו נגד קשקשים')
         # Using the "add photo" function
-        add.add_photo()
+        util.add_photo()
         # Using the "add background photo" function
         add.add_background_photo()
         # Using the "click on add button" function
         add.click_on_add_button()
         driver.implicitly_wait(2)
         # Using the "searchField" function
-        util.searchField('ניירות')
+        util.searchField('שמפו נגד קשקשים')
         time.sleep(10)
         # Using the "assert" function
-        util.assertFunc(add.assertDepartment(), 'ניירות')
+        util.assertFunc(add.assertDepartment(True), 'שמפו נגד קשקשים')
 
     def test_Create_a_new_department_invalid_when_all_fields_are_null(self):
         # Reboots the driver
