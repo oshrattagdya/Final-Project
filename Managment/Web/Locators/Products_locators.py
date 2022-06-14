@@ -2,9 +2,6 @@
 
 class ProductsLocators:
     dasbord_products_btn = "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/nav[1]/div[2]/a[2]"
-    search_product_field = "//main[1]/div[2]/div[1]/div[1]/span[1]/span[1]/div[1]/input[1]"
-    options = "(//i[@class='fa fa-ellipsis-v icon_icon '])"
-    add_btn = "//main[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/span[2]"
     desc_boxs = "//input[@placeholder='תיאור']"
     product_status_op = "//span[@class='checkbox_checkboxCircle']"
 
@@ -12,10 +9,9 @@ class ProductsLocators:
 
     #stage1
     barcode_field = "//form[1]/div[2]/div[2]/span[1]/div[1]/input[1]"
-    photo_upload = "//input[@type='file']" # dont work
     product_name_field = "//form[1]/div[2]/div[4]/span[1]/div[1]/input[1]"
     product_price = "//form[1]/div[2]/div[5]/span[1]/div[1]/input[1]"
-    date_field = "//input[@placeholder='תאריך תפוגה']" # dont work
+    date_field = "//input[@placeholder='תאריך תפוגה']"
     desc_field = "//form[1]/div[2]/div[8]/span[1]/div[1]/input[1]"
 
     #navgation

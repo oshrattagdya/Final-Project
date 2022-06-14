@@ -12,9 +12,6 @@ class LoginPageFunc():
         self.trado_logo = Login_Locators.trado_logo
         self.phone_lable = Login_Locators.phone_lable
 
-    # def JS_Message(self):
-    # return self.driver.find_element(By.CSS_SELECTOR, self.phone_field).get_attribute('validationMessage')
-
     def enter_phone(self, phone):
         self.driver.find_element(By.CSS_SELECTOR, self.phone_field).clear()
         self.driver.find_element(By.CSS_SELECTOR, self.phone_field).send_keys(phone)

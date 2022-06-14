@@ -8,15 +8,11 @@ class ProductsPageFunc():
     def __init__(self,driver:WebDriver):
         self.driver = driver
         self.dasbord_products_btn = ProductsLocators.dasbord_products_btn
-        self.search_product_field = ProductsLocators.search_product_field
-        self.options = ProductsLocators.options
-        self.add_btn = ProductsLocators.add_btn
         self.product_status_op = ProductsLocators.product_status_op
         self.desc_boxs = ProductsLocators.desc_boxs
         self.barcode_field = ProductsLocators.barcode_field
         self.product_name_field = ProductsLocators.product_name_field
         self.product_price = ProductsLocators.product_price
-        self.photo_upload = ProductsLocators.photo_upload
         self.date_field = ProductsLocators.date_field
         self.next_btn = ProductsLocators.next_btn
         self.back_btn = ProductsLocators.back_btn
@@ -42,66 +38,49 @@ class ProductsPageFunc():
         self.contact_num_field = ProductsLocators.contact_num_field
 
 
-
-
-
-    def click_options_navbar(self):
-        self.driver.find_element(By.XPATH,self.options).click()
-
-    def click_next_btn(self):
-        self.driver.find_element(By.XPATH,self.next_btn).click()
-
-    def click_back_btn(self):
-        self.driver.find_element(By.XPATH,self.back_btn).click()
-
-
-    def click_yvoan_op(self):
-        self.driver.find_element(By.XPATH,self.yvoan_makbil).click()
-
-    def click_status_active_op(self):
-        self.driver.find_element(By.XPATH,self.product_status_op).click()
-
-
-
     def click_products_btn(self):
         WebDriverWait(self.driver,10).until(
             EC.presence_of_element_located((By.XPATH,self.dasbord_products_btn))
         ).click()
 
-    def click_add_btn(self):
-        WebDriverWait(self.driver,10).until(
-            EC.presence_of_element_located((By.XPATH,self.add_btn))
+
+
+
+    def click_next_btn(self):
+
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, self.next_btn))
         ).click()
 
-    def search_product(self,categ_name):
-        self.categ_name = categ_name
-        search = self.driver.find_element(By.XPATH,self.search_product_field)
-        search.send_keys(self.categ_name)
-        search.send_keys(Keys.RETURN)
 
-    def description_details(self,desc):
+    def click_back_btn(self):
+
         WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, self.desc_boxs))
-        ).send_keys(desc)
-
-    def insert_barcode_data(self,barcode_data):
-        self.barcode_data= barcode_data
-        self.driver.find_element(By.XPATH,self.barcode_field).send_keys(self.barcode_data)
+            EC.presence_of_element_located((By.XPATH, self.back_btn))
+        ).click()
 
 
-    def insert_product_name_data(self,product_name):
-        self.product_name= product_name
-        self.driver.find_element(By.XPATH,self.product_name_field).send_keys(self.product_name)
+
+    def click_status_active_op(self):
+
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, self.product_status_op))
+        ).click()
+
+    def set_mendetury_fields_of_product(self, barcode_data, product_name, product_price_data):
+        self.barcode_data = barcode_data
+        self.product_name = product_name
+        self.product_price_data = product_price_data
+        self.driver.find_element(By.XPATH, self.barcode_field).send_keys(self.barcode_data)
+
+        self.driver.find_element(By.XPATH, self.product_name_field).send_keys(self.product_name)
+
+        self.driver.find_element(By.XPATH, self.product_price).send_keys(self.product_price_data)
 
 
-    def insert_product_price_data(self,product_price_data):
-        self.product_price_data= product_price_data
-        self.driver.find_element(By.XPATH,self.product_price).send_keys(self.product_price_data)
 
 
-    def click_upload_photo(self):
 
-        self.driver.find_element(By.XPATH,self.photo_upload).click()
 
 
     def insert_expiration_date(self,expiration_date):
@@ -125,6 +104,13 @@ class ProductsPageFunc():
 
     def click_dep_auto_option(self):
         self.driver.find_element(By.XPATH,self.dep_auto_op).click()
+
+
+    def click_yvoan_op(self):
+
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, self.yvoan_makbil))
+        ).click()
 
 
 
@@ -172,6 +158,12 @@ class ProductsPageFunc():
 
         contact_num_input = self.driver.find_element(By.XPATH, self.contact_num_field)
         contact_num_input.send_keys(contact)
+
+
+    def description_details(self,desc):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, self.desc_boxs))
+        ).send_keys(desc)
 
 
 

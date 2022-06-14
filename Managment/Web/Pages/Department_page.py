@@ -10,7 +10,6 @@ class DepartmentPageFunc:
         self.driver = driver
         self.department_button = Department_Locators.departmet_button
         self.name_field = Department_Locators.name_field
-        self.phone_field = Department_Locators.phone_field
         self.background_photo = Department_Locators.background_photo
         self.add_button = Department_Locators.add_button
         self.activ_button = Department_Locators.activ_button
@@ -32,11 +31,8 @@ class DepartmentPageFunc:
         self.driver.find_element(By.CSS_SELECTOR,self.name_field).clear()
         self.driver.find_element(By.CSS_SELECTOR,self.name_field).send_keys(name)
 
-    def add_photo(self):
-        self.driver.find_element(By.XPATH,self.phone_field).send_keys(r'''C:\Users\logo-linkedin-4096.png''')
-
     def add_background_photo(self):
-        self.driver.find_element(By.XPATH,self.background_photo).send_keys(r'''"C:\Users\logo-linkedin-4096.png"''')
+        self.driver.find_element(By.XPATH,self.background_photo).send_keys(r'''C:\Users\logo-linkedin-4096.png''')
 
     def click_on_add_button(self):
         self.driver.find_element(By.CSS_SELECTOR,self.add_button).click()
