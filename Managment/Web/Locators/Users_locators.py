@@ -20,6 +20,9 @@ class UsersLocators:
     eror_note = "div[class='form_note ']"
 
     #update locators
-    update = "//tbody/tr[1]/td[2]"
+    update = "//tbody/tr[1]/td[1]"
     updt_btn = "input[value='עדכון']"
     head = "//body/div[@id='root']/div[1]/div[4]/div[1]/h4[1]/span[1]"
+
+
+

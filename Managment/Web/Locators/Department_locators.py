@@ -12,14 +12,16 @@ class Department_Locators:
     assert_name_txt_Position_2 = "//tbody/tr[2]/td[2]"
     assert_txt_error = "//div[@class='form_note ']"
     assert_txt_search_error = '.paging_rowsNumView'
-    assert_img =  "img[src='https://storage.cloud.google.com/trado_images/department/461hdlknbycfhypslie6ckppafmkm-1655201208773']"
+    assert_img = "imageDiv"
 
     """ Locators for departments search"""
-    Identifier_txt = "tbody tr:nth-child(2) td:nth-child(1)"
+    Identifier_txt_position2 = "tbody tr:nth-child(2) td:nth-child(1)"
 
     """ Locators for departments ui"""
     ui_txt = '.pages_children'
     menuBar = '.header_title'
+    dropMenu_option_department = "div.dropMenu_option:nth-child({}) > span.dropMenu_text"
+
 
     """ Locators for departments Update"""
     update_button = "form_submitBtn"

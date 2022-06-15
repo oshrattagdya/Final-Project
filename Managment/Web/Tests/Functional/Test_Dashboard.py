@@ -1,3 +1,4 @@
+import time
 import allure
 import pytest
 from selenium.webdriver.common.by import By
@@ -13,35 +14,35 @@ from time import sleep
 @pytest.mark.usefixtures('connect_home_page')
 class TestDashboard(Base):
 
+
     def test_navbar_btn(self):
         driver = self.driver
         dash = DashboardPageFunc(driver)
+        txt = ['קופונים', 'Finances', 'הזמנות', 'מוצרים', 'מבצעים', 'חנויות', 'משתמשים', 'Finances']
         util = Utilitis(driver)
-        dash.click_cup()
-        text_cupon = util.get_text(DashboardLocators.text)
-        util.assertFunc(text_cupon,"קופונים")
-        driver.back()
-        dash.orders_click()
-        order = util.get_text(DashboardLocators.text)
-        util.assertFunc(order, "הזמנות")
-        driver.back()
-        dash.products_click()
-        prod = util.get_text(DashboardLocators.text)
-        util.assertFunc(prod, "מוצרים")
-        driver.back()
-        dash.sells_click()
-        sel = util.get_text(DashboardLocators.text)
-        util.assertFunc(sel, "מבצעים")
-        driver.back()
-        dash.stores_click()
-        store = util.get_text(DashboardLocators.text)
-        util.assertFunc(store, "חנויות")
-        driver.back()
-        dash.users_click()
-        user = util.get_text(DashboardLocators.text)
-        util.assertFunc(user, "משתמשים")
+        for i in range(1,8):
+            if i == 2 :
+                continue
+            driver.find_element(By.XPATH,f"(//a[contains(@class,'dashboard_count')])[{i}]").click()
+            time.sleep(2)
+            header = util.get_text(DashboardLocators.text)
+            util.assertFunc(header,txt[i-1])
+            driver.back()
+            time.sleep(2)
 
 
+
+
+
+    def test_ui(self):
+        driver = self.driver
+        dash = DashboardPageFunc(driver)
+        util = Utilitis(driver)
+        dash.graf_display()
+        sum = dash.avrage()
+        util.assertFunc(sum,'₪8753.01')
+        ord = dash.order_()
+        util.assertFunc(ord,"7")
 
 
 

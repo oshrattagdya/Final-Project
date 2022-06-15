@@ -64,11 +64,12 @@ class Utilitis():
 
 
     @allure.step
-    def addBtn(self):
-        self.driver.find_element(By.CSS_SELECTOR,Utils_Locators.options_btn).click()
-        self.driver.find_element(By.XPATH,Utils_Locators.add_btn).click()
-
-
+    def addBtn(self, x):
+        if x == True:
+             self.driver.find_element(By.CSS_SELECTOR,Utils_Locators.options_btn).click()
+             self.driver.find_element(By.XPATH,Utils_Locators.add_btn).click()
+        else:
+            self.driver.find_element(By.CSS_SELECTOR, Utils_Locators.options_btn).click()
     @allure.step
     def assertFunc(self, a, b):
 
