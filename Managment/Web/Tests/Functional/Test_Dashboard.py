@@ -10,7 +10,7 @@ from time import sleep
 
 
 
-@pytest.mark.usefixtures('set_up')
+@pytest.mark.usefixtures('connect_home_page')
 class TestDashboard(Base):
 
     def test_navbar_btn(self):

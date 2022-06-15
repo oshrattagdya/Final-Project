@@ -27,7 +27,7 @@ class Utilitis():
         self.export_btn = Utils_Locators.export_btn
         self.photo_field = Utils_Locators.photo_field
 
-
+    @allure.step
     def select_result_amount(self,amount):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME,self.pesent_res))
@@ -39,16 +39,17 @@ class Utilitis():
         option.click()
 
 
-
+    @allure.step
     def get_text(self,locator):
         text = self.driver.find_element(By.XPATH, locator).text
         return text
 
 
-
+    @allure.step
     def valid_Message(self,field):
         return self.driver.find_element(By.CSS_SELECTOR, self.field).get_attribute('validationMessage')
 
+    @allure.step
     def search_box(self,name):
         self.name = name
 
@@ -62,6 +63,7 @@ class Utilitis():
             EC.presence_of_element_located((By.XPATH, self.table_res))).click()
 
 
+    @allure.step
     def addBtn(self):
         self.driver.find_element(By.CSS_SELECTOR,Utils_Locators.options_btn).click()
         self.driver.find_element(By.XPATH,Utils_Locators.add_btn).click()

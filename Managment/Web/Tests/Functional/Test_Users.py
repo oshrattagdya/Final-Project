@@ -91,9 +91,9 @@ class TestUsers(Base):
         util = Utilitis(driver)
         driver.implicitly_wait(10)
         user.userpage_btn()
-        util.search_box("יונתן")
+        util.search_box("ישראל")
         name = util.get_text("//tbody/tr[1]/td[1]")
-        util.assertFunc(name,"יונתן")
+        util.assertFunc(name,"ישראל")
 
 
     def test_serch_User_lastname(self):
@@ -102,10 +102,10 @@ class TestUsers(Base):
         util = Utilitis(driver)
         driver.implicitly_wait(10)
         user.userpage_btn()
-        util.search_box("אלמיהו")
+        util.search_box("מנגיסטו")
         emil = util.get_text("//tbody/tr[1]/td[2]")
         print(emil)
-        util.assertFunc(emil,"אלמיהו")
+        util.assertFunc(emil,"מנגיסטו")
 
 
 
