@@ -20,7 +20,9 @@ class Userspagefunc():
         self.pick = UsersLocators.pick
         self.btnadd = UsersLocators.btnadd
         self.varify = UsersLocators.varify
-
+        self.update = UsersLocators.update
+        self.updt_btn = UsersLocators.updt_btn
+        self.head = UsersLocators.head
 
 
     @allure.step
@@ -29,21 +31,25 @@ class Userspagefunc():
 
     @allure.step
     def addname(self,name):
+        self.driver.find_element(By.XPATH,self.name).clear()
         self.driver.find_element(By.XPATH,self.name).click()
         self.driver.find_element(By.XPATH,self.name).send_keys(name)
 
     @allure.step
     def addlastname(self,lastname):
+        self.driver.find_element(By.XPATH,self.lastname).clear()
         self.driver.find_element(By.XPATH,self.lastname).click()
         self.driver.find_element(By.XPATH,self.lastname).send_keys(lastname)
 
     @allure.step
     def addemil(self,emil):
+        self.driver.find_element(By.XPATH,self.emil).clear()
         self.driver.find_element(By.XPATH,self.emil).click()
         self.driver.find_element(By.XPATH,self.emil).send_keys(emil)
 
     @allure.step
     def addphone(self,phone):
+        self.driver.find_element(By.XPATH,self.phone).clear()
         self.driver.find_element(By.XPATH,self.phone).click()
         self.driver.find_element(By.XPATH,self.phone).send_keys(phone)
 
@@ -55,7 +61,7 @@ class Userspagefunc():
         options.click()
 
     @allure.step
-    def store_option_click(self, op):
+    def store_option_click(self):
         self.driver.find_element(By.XPATH, self.store).click()
 
     @allure.step
@@ -66,3 +72,13 @@ class Userspagefunc():
     def get_text(self,locator,x):
         text = self.driver.find_element(By.XPATH, locator.format(x)).text
         return text
+
+
+    def update_click(self):
+        self.driver.find_element(By.XPATH,self.update).click()
+        win = self.driver.find_element(By.XPATH,self.head).text
+        assert win == "משתמש"
+
+
+    def update_btn(self):
+        self.driver.find_element(By.CSS_SELECTOR,self.updt_btn).click()

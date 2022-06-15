@@ -17,3 +17,9 @@ class UsersLocators:
 
     #assert locator
     varify = "//td[normalize-space()='{}']"
+    eror_note = "div[class='form_note ']"
+
+    #update locators
+    update = "//tbody/tr[1]/td[2]"
+    updt_btn = "input[value='עדכון']"
+    head = "//body/div[@id='root']/div[1]/div[4]/div[1]/h4[1]/span[1]"

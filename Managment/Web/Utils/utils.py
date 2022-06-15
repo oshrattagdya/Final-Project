@@ -41,13 +41,13 @@ class Utilitis():
 
     @allure.step
     def get_text(self,locator):
-        text = self.driver.find_element(By.XPATH, locator).text
+        text = self.driver.find_element(By.CSS_SELECTOR, locator).text
         return text
 
 
     @allure.step
     def valid_Message(self,field):
-        return self.driver.find_element(By.CSS_SELECTOR, self.field).get_attribute('validationMessage')
+        return self.driver.find_element(By.XPATH, field).get_attribute('validationMessage')
 
     @allure.step
     def search_box(self,name):
@@ -69,7 +69,7 @@ class Utilitis():
         self.driver.find_element(By.XPATH,Utils_Locators.add_btn).click()
 
 
-
+    @allure.step
     def assertFunc(self, a, b):
 
         driver = self.driver
@@ -80,10 +80,12 @@ class Utilitis():
             raise allure.attach(self.driver.get_screenshot_as_png(), self.driver.save_screenshot("screenshot"),
                                 attachment_type=AttachmentType.PNG)
 
+    @allure.step
     def exportBtn(self):
         self.driver.find_element(By.CSS_SELECTOR,Utils_Locators.options_btn).click()
         self.driver.find_element(By.XPATH,Utils_Locators.export_btn).click()
 
+    @allure.step
     def searchField(self,name):
         self.name = name
         search = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH,self.search_field)))
@@ -91,6 +93,7 @@ class Utilitis():
         search.send_keys(self.name)
         search.send_keys(Keys.RETURN)
 
+    @allure.step
     def add_photo(self,url):
         self.driver.find_element(By.XPATH, self.photo_field).send_keys(f'''{url}''')
 

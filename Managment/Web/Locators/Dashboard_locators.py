@@ -1,6 +1,7 @@
 """ Locators for Dashboard screen"""
 
 class DashboardLocators:
+    #navbar button up
     cupons_button = "//a[@href='#/coupons']//div"
     finnens ="(//a[@class='dashboard_count dashboard_half'])[2]"
     orders = "(//a[contains(@class,'dashboard_count')])[3]"
@@ -10,5 +11,7 @@ class DashboardLocators:
     users = "(//a[contains(@class,'dashboard_count')])[7]"
 
     allnav = "(//a[contains(@class,'dashboard_count')])[{}]"
+    graf = "//canvas[@class='chartjs-render-monitor']"
+
     #assert locators
     text = "//main[1]/div[1]/div[1]/span[1]/h4"

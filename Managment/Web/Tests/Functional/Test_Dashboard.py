@@ -19,27 +19,27 @@ class TestDashboard(Base):
         util = Utilitis(driver)
         dash.click_cup()
         text_cupon = util.get_text(DashboardLocators.text)
-        assert text_cupon == "קופונים"
+        util.assertFunc(text_cupon,"קופונים")
         driver.back()
         dash.orders_click()
         order = util.get_text(DashboardLocators.text)
-        assert order == "הזמנות"
+        util.assertFunc(order, "הזמנות")
         driver.back()
         dash.products_click()
         prod = util.get_text(DashboardLocators.text)
-        assert prod == "מוצרים"
+        util.assertFunc(prod, "מוצרים")
         driver.back()
         dash.sells_click()
         sel = util.get_text(DashboardLocators.text)
-        assert sel == "מבצעים"
+        util.assertFunc(sel, "מבצעים")
         driver.back()
         dash.stores_click()
         store = util.get_text(DashboardLocators.text)
-        assert store == "חנויות"
+        util.assertFunc(store, "חנויות")
         driver.back()
         dash.users_click()
         user = util.get_text(DashboardLocators.text)
-        assert user == "משתמשים"
+        util.assertFunc(user, "משתמשים")
 
 
 

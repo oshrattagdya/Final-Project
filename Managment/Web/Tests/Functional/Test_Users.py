@@ -2,7 +2,7 @@ import pytest
 from selenium.webdriver.common.by import By
 from Managment.Web.Base.BasePage import Base
 from Managment.Web.Pages.Users_page import Userspagefunc
-from Managment.Web.Locators.Dashboard_locators import DashboardLocators
+from Managment.Web.Locators.Users_locators import UsersLocators
 from Managment.Web.Utils.utils import Utilitis
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
@@ -42,11 +42,11 @@ class TestUsers(Base):
         user.addname("sd")
         user.addlastname("jambar")
         user.addemil("")
-        user.addphone("195222223")
+        user.addphone("1952222233")
         user.store_option("dddd")
         user.add_btn()
-        val = util.get_text("//div[contains(text(),'דוא״ל לא תקין')]")
-        util.assertFunc(val ,'דוא״ל לא תקין')
+        emil = util.get_text(UsersLocators.eror_note)
+        util.assertFunc(emil ,'דוא״ל לא תקין')
         sleep(2)
 
     def test_phoneNull(self):
@@ -63,7 +63,7 @@ class TestUsers(Base):
         user.addphone("")
         user.store_option("dddd")
         user.add_btn()
-        val = util.get_text("//div[contains(text(),'מס׳ טלפון לא תקין')]")
+        val = util.get_text(UsersLocators.eror_note)
         util.assertFunc(val ,'מס׳ טלפון לא תקין')
 
 
@@ -78,11 +78,12 @@ class TestUsers(Base):
         user.addname("sd")
         user.addlastname("jambar")
         user.addemil("d@j.com")
-        user.addphone("195222225")
-        user.store_option_click('')
+        user.addphone("1952222227")
+        sleep(3)
+        user.store_option_click()
         user.add_btn()
-        val = util.get_text("//div[contains(text(),'נא למלא שדה זה')]")
-        util.assertFunc(val ,'נא למלא שדה זה')
+        store = util.get_text(UsersLocators.eror_note)
+        util.assertFunc(store,'נא למלא שדה זה')
 
 
     def test_serch_User_name(self):
@@ -104,7 +105,6 @@ class TestUsers(Base):
         user.userpage_btn()
         util.search_box("מנגיסטו")
         emil = util.get_text("//tbody/tr[1]/td[2]")
-        print(emil)
         util.assertFunc(emil,"מנגיסטו")
 
 
@@ -116,9 +116,28 @@ class TestUsers(Base):
         driver.implicitly_wait(10)
         user.userpage_btn()
         util.search_box("0549703147")
-        emil = util.get_text("//tbody/tr[1]/td[4]")
-        print(emil)
-        util.assertFunc(emil,"0549703147")
+        phone = util.get_text("//tbody/tr[1]/td[4]")
+        util.assertFunc(phone,"0549703147")
+
+
+
+    def test_update_data(self):
+        driver = self.driver
+        user = Userspagefunc(driver)
+        util = Utilitis(driver)
+        driver.implicitly_wait(10)
+        user.userpage_btn()
+        sleep(2)
+        user.update_click()
+        user.addname("as")
+        user.addlastname("jambi")
+        user.addemil("ddd@dd.com")
+        user.addphone("1952222229")
+        user.update_btn()
+        sleep(2)
+        a = util.get_text("tbody tr:nth-child(1) td:nth-child(1)")
+        util.assertFunc(a,"as")
+
 
 
 

@@ -17,6 +17,7 @@ class DashboardPageFunc():
         self.sells = DashboardLocators.sells
         self.stores = DashboardLocators.stores
         self.users = DashboardLocators.users
+        self.graf = DashboardLocators.graf
         self.allnav = DashboardLocators.allnav
 
 
@@ -47,6 +48,9 @@ class DashboardPageFunc():
     @allure.step
     def users_click(self):
         self.driver.find_element(By.XPATH,self.users).click()
+
+    def graf_display(self):
+        self.driver.find_element(By.XPATH,self.graf).is_displayed()
 
     # @allure.step
     # def all_navbar(self):
