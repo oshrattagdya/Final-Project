@@ -19,6 +19,8 @@ class DashboardPageFunc():
         self.users = DashboardLocators.users
         self.graf = DashboardLocators.graf
         self.allnav = DashboardLocators.allnav
+        self.avg_sum = DashboardLocators.avg_sum
+        self.order_sum = DashboardLocators.order_sum
 
 
     @allure.step
@@ -52,24 +54,17 @@ class DashboardPageFunc():
     def graf_display(self):
         self.driver.find_element(By.XPATH,self.graf).is_displayed()
 
-    # @allure.step
-    # def all_navbar(self):
-    #     util = Utilitis(self.driver)
-    #     for i in range(1,7):
-    #         data = "//body/div[@id='root']/div[1]/div[2]/main[1]/div[2]/div[1]/div[1]/a[{}]/span[1]"
-    #         if i == 2:
-    #             continue
-    #         self.driver.find_element(By.XPATH,self.allnav.format(i)).click()
-    #         sleep(3)
-    #         x = util.get_text(DashboardLocators.text)
-    #         self.driver.implicitly_wait(5)
-    #         u = self.driver.find_element(By.XPATH,data.format(i)).text
-    #         print(u)
-    #         if x != u:
-    #             return False
-    #         else:
-    #             self.driver.back()
-    #     return True
+    def avrage(self):
+        self.driver.find_element(By.XPATH,self.avg_sum).is_displayed()
+        avg = self.driver.find_element(By.XPATH,self.avg_sum).text
+        return avg
+
+    def order_(self):
+        self.driver.find_element(By.XPATH, self.order_sum).is_displayed()
+        sm = self.driver.find_element(By.XPATH, self.order_sum).text
+        return sm
+
+
 
 
 

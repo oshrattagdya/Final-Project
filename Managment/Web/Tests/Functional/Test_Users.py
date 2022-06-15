@@ -120,7 +120,6 @@ class TestUsers(Base):
         util.assertFunc(phone,"0549703147")
 
 
-
     def test_update_data(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -131,11 +130,12 @@ class TestUsers(Base):
         user.update_click()
         user.addname("as")
         user.addlastname("jambi")
-        user.addemil("ddd@dd.com")
+        user.addemil("ddd@ddJ.com")
         user.addphone("1952222229")
+        user.store_option("shula")
         user.update_btn()
         sleep(2)
-        a = util.get_text("tbody tr:nth-child(1) td:nth-child(1)")
+        a = user.get_text(UsersLocators.update)
         util.assertFunc(a,"as")
 
 

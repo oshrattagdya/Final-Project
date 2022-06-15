@@ -15,3 +15,7 @@ class DashboardLocators:
 
     #assert locators
     text = "span[class='header_title'] h4"
+
+    # ui locators
+    avg_sum = "//div[@class='dashboard_pieData']//div[1]//*[name()='svg']//*[name()='g' and contains(@class,'undefined ')]//*[name()='text' and contains(@y,'50%')]//*[name()='tspan' and contains(@class,'donutChart')]"
+    order_sum = "//div[@class='dashboard_pieData']//div[2]//*[name()='svg']//*[name()='g' and contains(@class,'undefined ')]//*[name()='text' and contains(@y,'50%')]//*[name()='tspan' and contains(@class,'donutChart')]"
