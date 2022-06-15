@@ -26,6 +26,7 @@ class CategoriesLocators:
     update_buttun = "//input[@value='עדכון']"
     indentify = "//td[normalize-space()='4jp555dl4dvbcra']"
     status = "//tbody/tr[1]/td[4]"
+    ui_categ_page = "//main[@class='pages_main ']"
 
 
 
