@@ -27,25 +27,35 @@ class CategoriesPageFunc():
         self.ab = "//label[contains(text(),'שדות')]"
         self.required_message_second_name_field = CategoriesLocators.required_message_second_name_field
         self.required_message_type_field = CategoriesLocators.required_message_type_field
+        self.uniq_message = CategoriesLocators.uniq_message
+        self.search_name = CategoriesLocators.search_name
+        self.search_categ = CategoriesLocators.search_categ
+        self.update_buttun = CategoriesLocators.update_buttun
+        self.indentify = CategoriesLocators.indentify
+        self.status = CategoriesLocators.status
 
 
+
+    """functions"""
     def click_categories_navbar(self):
         self.driver.find_element(By.XPATH,self.categories_nav_btn).click()
+
     # click on 3 dots button to open options
     def click_options_navbar(self):
         self.driver.find_element(By.XPATH,self.options).click()
+
     # click on add new category
     def click_add_btn(self):
         WebDriverWait(self.driver,10).until(
             EC.presence_of_element_located((By.XPATH,self.add_btn))
         ).click()
+
     # final step to add new category click on add button on form
     def click_submit_add_category(self):
         self.driver.find_element(By.XPATH,self.add_submit).click()
     # click on active option on form
     def click_status_active_op(self):
         self.driver.find_element(By.XPATH,self.product_status_op).click()
-
 
     #search for specific category on serach box
     def search_category(self,categ_name):
@@ -57,6 +67,7 @@ class CategoriesPageFunc():
     # insert new category name in add new category form
     def insert_new_category_name(self,new_categ_name):
         self.new_categ_name = new_categ_name
+        self.driver.find_element(By.XPATH,self.name_field).clear()
         self.driver.find_element(By.XPATH,self.name_field).send_keys(self.new_categ_name)
 
     # insert new department name in add new category form
@@ -68,11 +79,12 @@ class CategoriesPageFunc():
     # insert new field name in add new category form
     def insert_field_name(self,field_name):
         self.field_name = field_name
+        # self.driver.find_element(By.XPATH,self.fields_name).clear()
         self.driver.find_element(By.XPATH,self.fields_name).send_keys(self.field_name)
 
     # select type option  in add new category form
     def type_option(self,op):
-        self.driver.find_element(By.XPATH,self.type_field).click()
+        self.driver.find_element(By.CSS_SELECTOR,self.type_field).click()
 
         options = self.driver.find_element(By.XPATH,self.type_ops.format(op))
         options.click()
@@ -101,6 +113,42 @@ class CategoriesPageFunc():
 
     def get_required_message_type_field(self):
         return self.driver.find_element(By.XPATH,self.required_message_type_field).get_attribute("innerText")
+
+    def get_uniq_message(self):
+        return self.driver.find_element(By.XPATH,self.uniq_message).get_attribute("innerText")
+
+    def get_search_name(self,search_name):
+        return self.driver.find_element(By.XPATH,self.search_name).get_attribute("innerText")
+
+    def get_search_categ(self):
+        return self.driver.find_element(By.XPATH, self.search_categ).get_attribute("innerText")
+
+    def click_search_name(self):
+        return self.driver.find_element(By.XPATH, self.search_name).click()
+
+    def click_update_buttun(self):
+        return self.driver.find_element(By.XPATH, self.update_buttun).click()
+
+    def get_indentify(self):
+        return self.driver.find_element(By.XPATH, self.indentify).get_attribute("innerText")
+
+    def click_indentify(self):
+        return self.driver.find_element(By.XPATH, self.indentify).click()
+
+
+    def get_status(self):
+        return self.driver.find_element(By.XPATH, self.status).get_attribute("innerText")
+
+
+
+
+
+
+
+
+
+
+
 
 
 

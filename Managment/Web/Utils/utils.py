@@ -47,7 +47,7 @@ class Utilitis():
 
     @allure.step
     def valid_Message(self,field):
-        return self.driver.find_element(By.CSS_SELECTOR, self.field).get_attribute('validationMessage')
+        return self.driver.find_element(By.CSS_SELECTOR, field).get_attribute('validationMessage')
 
     @allure.step
     def search_box(self,name):

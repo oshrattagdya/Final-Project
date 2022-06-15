@@ -9,7 +9,7 @@ class CategoriesLocators:
     name_field = "//input[@tabletype='string']"
     department_filed = "//input[contains(@placeholder,'מחלקות')]"
     fields_name = "(//input[@placeholder='שם'])[2]"
-    type_field = "//input[@placeholder='סוג']"
+    type_field = "input[placeholder='סוג']"
     type_ops = "//div[contains(text(),'{}')]"
     add_submit = "//input[@value='הוספה']"
     product_status_op = "//span[@class='checkbox_checkboxCircle']"
@@ -19,5 +19,13 @@ class CategoriesLocators:
     required_message_name = "//div[contains(@class,'formItem_name')]//div[contains(@class,'form_note')][normalize-space()='']"
     required_message_second_name_field = "//div[@class='form_note ']"
     required_message_type_field = "//div[@class='form_note ']"
+    uniq_message = "//div[@class='form_message']"
+
+    search_name = "//td[contains(text(),'שושנים')]"
+    search_categ = "//div[contains(text(),'קוניאק')]"
+    update_buttun = "//input[@value='עדכון']"
+    indentify = "//td[normalize-space()='4jp555dl4dvbcra']"
+    status = "//tbody/tr[1]/td[4]"
+
 
 
