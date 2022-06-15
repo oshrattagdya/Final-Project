@@ -14,4 +14,4 @@ class DashboardLocators:
     graf = "//canvas[@class='chartjs-render-monitor']"
 
     #assert locators
-    text = "//main[1]/div[1]/div[1]/span[1]/h4"
+    text = "span[class='header_title'] h4"

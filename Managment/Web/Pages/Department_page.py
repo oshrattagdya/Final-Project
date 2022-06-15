@@ -16,12 +16,13 @@ class DepartmentPageFunc:
         self.assert_name_txt_Position_1 = Department_Locators.assert_name_txt_Position_1
         self.assert_name_txt_Position_2 = Department_Locators.assert_name_txt_Position_2
         self.assert_txt_error = Department_Locators.assert_txt_error
-        self.Identifier_txt = Department_Locators.Identifier_txt
+        self.Identifier_txt_position2 = Department_Locators.Identifier_txt_position2
         self.assert_txt_search_error = Department_Locators.assert_txt_search_error
         self.ui_txt = Department_Locators.ui_txt
         self.menuBar = Department_Locators.menuBar
         self.update_button = Department_Locators.update_button
         self.assert_img = Department_Locators.assert_img
+        self.dropMenu_option_department = Department_Locators.dropMenu_option_department
 
 
     def click_department_button(self):
@@ -50,7 +51,7 @@ class DepartmentPageFunc:
         return self.driver.find_element(By.XPATH,self.assert_txt_error).get_attribute('innerText')
 
     def searchIdentifier(self):
-        return self.driver.find_element(By.CSS_SELECTOR,self.Identifier_txt).get_attribute('innerText')
+        return self.driver.find_element(By.CSS_SELECTOR,self.Identifier_txt_position2).get_attribute('innerText')
 
     def searchDepartmentIncorrectly(self):
         return self.driver.find_element(By.CSS_SELECTOR,self.assert_txt_search_error).get_attribute('innerText')
@@ -61,14 +62,18 @@ class DepartmentPageFunc:
     def ui_txt_for_menu_bar(self):
         return self.driver.find_element(By.CSS_SELECTOR, self.menuBar).get_attribute('innerText')
 
+    def ui_txt_for_dropMenu(self,x):
+            return self.driver.find_element(By.CSS_SELECTOR, self.dropMenu_option_department.format(x)).get_attribute('innerText')
+
+
     def click_on_department(self):
-        self.driver.find_element(By.CSS_SELECTOR, self.Identifier_txt).click()
+        self.driver.find_element(By.CSS_SELECTOR, self.Identifier_txt_position2).click()
 
     def click_on_update_button(self):
         self.driver.find_element(By.CLASS_NAME, self.update_button).click()
 
     def assert_img_src(self):
-        return self.driver.find_element(By.CSS_SELECTOR, self.assert_img).get_attribute('src')
+         return self.driver.find_element(By.CLASS_NAME, self.assert_img).get_attribute("src")
 
 
 
