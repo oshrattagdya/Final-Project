@@ -3,9 +3,9 @@ import time
 import pytest
 from selenium.webdriver.common.by import By
 from Managment.Web.Base.BasePage import Base
-from Managment.Web.Pages.Login_page import LoginPageFunc
-from selenium.webdriver.support import expected_conditions as EC
 from Managment.Web.Utils.utils import Utilitis
+from Managment.Web.Pages.Login_page import LoginPageFunc
+
 
 
 
@@ -14,50 +14,44 @@ class TestLogin(Base):
 
     """test 1"""
     def test_login_success(self):
-        name = "//body[1]/div[1]/div[1]/div[2]/div[1]/nav[1]/div[1]/div[1]/span[2]"
         driver = self.driver
+        util = Utilitis(driver)
         login = LoginPageFunc(driver)
+        #insert personal details
         login.enter_phone('1950000000')
-        driver.implicitly_wait(10)
+        time.sleep(2)
         login.click_on_button()
+        time.sleep(2)
         driver.implicitly_wait(10)
+        time.sleep(2)
         login.enter_phone_code('1234')
+        time.sleep(2)
+        #clickin on login button
         login.click_on_button_login()
+        time.sleep(2)
 
-        try:
-            value = driver.find_element(By.XPATH,name).get_attribute("innerText")
-            assert value == "שלום ולדימירהתנתק"
-        except Exception as e:
-            driver.get_screenshot_as_png()
+        #using the assert function to valid our successful login
+        util.assertFunc(login.get_nameT1(),"שלום ולדימירהתנתק")
 
     """test 2"""
     def test_login_incorrectly_when_user_non_register(self):
-        user = "//div[contains(text(),'no such user')]"
         driver = self.driver
+        util = Utilitis(driver)
         login = LoginPageFunc(driver)
         login.enter_phone('4528762424')
         login.click_on_button()
 
-        try :
-            value = driver.find_element(By.XPATH, user).get_attribute("innerText")
-            assert user == "no such user"
-        except Exception as e:
-            driver.get_screenshot_as_png()
+        util.assertFunc(login.get_nameT2(),"no such user")
 
     """test 3"""
     def test_login_incorrect_when_phone_field_null(self):
         driver = self.driver
+        util = Utilitis(driver)
         login = LoginPageFunc(driver)
         login.enter_phone('')
         login.click_on_button()
-        # assert login.JS_Message() == ''
-        # login.enter_phone_code('1234')
-        # login.click_on_button_login()
-        util = Utilitis(driver)
-        try:
-            assert util.valid_Message("input[placeholder='טלפון']") == 'זהו שדה חובה.'
-        except Exception as e:
-            driver.get_screenshot_as_png()
+
+        util.assertFunc(util.valid_Message,'זהו שדה חובה.')
 
     """test 4"""
     def test_login_incorrectly_when_phone_field_is_less_than_10_num(self):

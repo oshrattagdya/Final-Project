@@ -36,6 +36,7 @@ class CategoriesPageFunc():
         self.ui_categ_page = CategoriesLocators.ui_categ_page
 
 
+
     """functions"""
     @allure.step
     def click_categories_navbar(self):

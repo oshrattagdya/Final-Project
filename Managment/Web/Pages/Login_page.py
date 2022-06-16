@@ -11,6 +11,10 @@ class LoginPageFunc():
         self.button_login = Login_Locators.button_login
         self.trado_logo = Login_Locators.trado_logo
         self.phone_lable = Login_Locators.phone_lable
+        self.nameT1 = Login_Locators.nameT1
+        self.nameT2 = Login_Locators.nameT2
+        self.user2 = Login_Locators.user2
+
 
     def enter_phone(self, phone):
         self.driver.find_element(By.CSS_SELECTOR, self.phone_field).clear()
@@ -31,3 +35,15 @@ class LoginPageFunc():
 
     def get_phone_lable(self):
         return self.driver.find_element(By.CSS_SELECTOR, self.phone_lable).get_attribute('defaultValue')
+
+    def get_nameT1(self):
+        return self.driver.find_element(By.XPATH,self.nameT1).get_attribute("innerText")
+
+    def get_nameT2(self):
+        return self.driver.find_element(By.XPATH, self.nameT2).get_attribute("innerText")
+
+    def get_user2(self):
+        return self.driver.find_element(By.XPATH, self.user2).get_attribute("innerText")
+
+    def test(self):
+        pass
