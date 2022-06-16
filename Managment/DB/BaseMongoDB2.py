@@ -9,9 +9,9 @@ class MongoDB():
         self.col = self.db[col]
     def find(self,q=""):
         for i in self.col.find(q):  # fetch all doc records
-            print(i)
+            return i
 
 
-# from Managment.Web.Base.BaseMongoDB import MongoDB
-#
+
+
 # MongoDB("trado_qa","users").find()

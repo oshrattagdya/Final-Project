@@ -1,9 +1,17 @@
 """Locators for Products screen"""
 
 class ProductsLocators:
-    dasbord_products_btn = "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/nav[1]/div[2]/a[2]"
-    desc_boxs = "//input[@placeholder='תיאור']"
-    product_status_op = "//span[@class='checkbox_checkboxCircle']"
+    dasbord_products_btn = "//body/div[@id='root']/div[1]/div[2]/div[1]/nav[1]/div[2]/a[2]"
+    desc_boxs = "input[placeholder='תיאור']"
+    product_status_op = ".checkbox_checkboxCircle"
+    row_res_details = "tbody tr:nth-child(1) td:nth-child({})"
+
+
+    # edting descreption box
+    add_description_btn = ".button_button"
+    writing_box = "div[data-contents='true']"
+    save_changes_btn = ".button_button.domEditor_saveBtn"
+    all_desc_box = ".domEditor_editor.rdw-editor-main"
 
 
 
@@ -15,8 +23,8 @@ class ProductsLocators:
 
 
     #navgation
-    next_btn = "//input[@value='הבא']"
-    back_btn = "//input[@name='back']"
+    next_btn = "input[value='הבא']"
+    back_btn = "input[value='חזרה']"
 
     #stage2
     cate_btn = "input[placeholder='קטגוריה על']"
@@ -26,7 +34,7 @@ class ProductsLocators:
     kidom_field = "//input[@placeholder='קידום']"
     kidom_op = "//form[1]/div[2]/div[1]/div[1]/span[1]/div[2]/div[1]/div"
 
-    dep_btn = "//input[@placeholder='מחלקה']"
+    dep_btn = "input[placeholder='מחלקה']"
     dep_auto_op = "//form[1]/div[2]/div[3]/div[1]/span[1]/div[2]/div[1]/div[1]"
     yvoan_makbil = "(//span[contains(@class,'checkbox_checkboxCircle')])[2]"
 

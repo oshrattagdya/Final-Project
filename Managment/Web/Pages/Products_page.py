@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from ..Locators.Products_locators import ProductsLocators
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
-
+from selenium.webdriver.common.action_chains import ActionChains
 
 class ProductsPageFunc:
     def __init__(self, driver: WebDriver):
@@ -40,6 +40,11 @@ class ProductsPageFunc:
         self.home_num_field = ProductsLocators.home_num_field
         self.contact_num_field = ProductsLocators.contact_num_field
         self.row_res_details = ProductsLocators.row_res_details
+        self.add_description_btn = ProductsLocators.add_description_btn
+        self.writing_box = ProductsLocators.writing_box
+        self.save_changes_btn = ProductsLocators.save_changes_btn
+        self.all_desc_box = ProductsLocators.all_desc_box
+
 
     def click_products_btn(self):
         WebDriverWait(self.driver, 10).until(
@@ -47,16 +52,19 @@ class ProductsPageFunc:
         ).click()
 
     def click_next_btn(self):
+        action = ActionChains(self.driver)
 
-        WebDriverWait(self.driver, 10).until(
+        next = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, self.next_btn))
-        ).click()
+        )
+        action.move_to_element(next).click(next).perform()
 
     def click_back_btn(self):
-
-        WebDriverWait(self.driver, 10).until(
+        back_action = ActionChains(self.driver)
+        back = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR,self.back_btn))
-        ).click()
+        )
+        back_action.move_to_element(back).click(back).perform()
 
     def click_status_active_op(self):
 
@@ -96,13 +104,20 @@ class ProductsPageFunc:
         date.send_keys(self.expiration_date)
 
     def category_option(self, op):
-        self.driver.find_element(By.CSS_SELECTOR, self.cate_btn).click()
+        self.category = self.driver.find_element(By.CSS_SELECTOR, self.cate_btn)
+        self.category.click()
 
         options = self.driver.find_element(By.XPATH, self.cate_op.format(op))
         options.click()
 
+    def clear_category_field(self):
+        self.category = self.driver.find_element(By.CSS_SELECTOR, self.cate_btn)
+        self.category.clear()
+
+
     def dep_option(self, op):
-        self.driver.find_element(By.XPATH, self.dep_btn).click()
+        self.department = self.driver.find_element(By.CSS_SELECTOR, self.dep_btn)
+        self.department.click()
 
         options = self.driver.find_elements(By.XPATH, self.store_op)
         options[op].click()
@@ -111,19 +126,29 @@ class ProductsPageFunc:
         self.driver.find_element(By.XPATH, self.dep_auto_op).click()
 
     def click_yvoan_op(self):
+        action_yvoan = ActionChains(self.driver)
 
-        WebDriverWait(self.driver, 10).until(
+        yvoan = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, self.yvoan_makbil))
-        ).click()
+        )
+        action_yvoan.move_to_element(yvoan).click(yvoan).perform()
+
 
     def store_option(self, op):
-        self.driver.find_element(By.CSS_SELECTOR, self.store_btn).click()
+        self.store = self.driver.find_element(By.CSS_SELECTOR, self.store_btn)
+        self.store.click()
+
 
         options = self.driver.find_element(By.XPATH, self.store_op.format(op))
         options.click()
 
+    def clear_store_field(self):
+        self.category = self.driver.find_element(By.CSS_SELECTOR, self.store_btn)
+        self.category.clear()
+
     def kidom_option(self, op):
-        self.driver.find_element(By.XPATH, self.kidom_field).click()
+        kidom = self.driver.find_element(By.XPATH, self.kidom_field)
+        kidom.click()
 
         options = self.driver.find_elements(By.XPATH, self.kidom_op)
         options[op].click()
@@ -131,38 +156,50 @@ class ProductsPageFunc:
     def set_wight_op_on_with_data(self, op, wight):
         self.driver.find_element(By.XPATH, self.wight_btn).click()
         avg_wight = self.driver.find_element(By.XPATH, self.wight_avg_per_unit_field)
+        avg_wight.clear()
         avg_wight.send_keys(wight)
-        self.driver.find_element(By.XPATH, self.wight_unit_scale_btn).click()
+        unit_scale = self.driver.find_element(By.XPATH, self.wight_unit_scale_btn)
+        unit_scale.clear()
+        unit_scale.click()
         options = self.driver.find_element(By.XPATH, self.scale_op.format(op))
         options.click()
 
     def set_boxes_amout_data(self, boxes, amount, min):
         boxes_amount = self.driver.find_element(By.XPATH, self.boxes_amout_field)
+        boxes_amount.clear()
         boxes_amount.send_keys(boxes)
 
         total_amount = self.driver.find_element(By.XPATH, self.amout_field)
+        total_amount.clear()
         total_amount.send_keys(amount)
 
         min_amount = self.driver.find_element(By.XPATH, self.min_amout_field)
+        min_amount.clear()
         min_amount.send_keys(min)
 
     def set_address_data(self, city, street, home, contact):
         city_input = self.driver.find_element(By.XPATH, self.city_field)
+        city_input.clear()
         city_input.send_keys(city)
 
         street_input = self.driver.find_element(By.XPATH, self.street_field)
+        street_input.clear()
         street_input.send_keys(street)
 
         home_num_input = self.driver.find_element(By.XPATH, self.home_num_field)
+        home_num_input.clear()
         home_num_input.send_keys(home)
 
         contact_num_input = self.driver.find_element(By.XPATH, self.contact_num_field)
+        contact_num_input.clear()
         contact_num_input.send_keys(contact)
 
     def description_details(self, desc):
-        WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, self.desc_boxs))
-        ).send_keys(desc)
+        description = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, self.desc_boxs))
+        )
+        description.clear()
+        description.send_keys(desc)
 
     def row_details(self, op):
         time.sleep(2)
@@ -183,3 +220,37 @@ class ProductsPageFunc:
 
         else:
             return data
+
+
+    def click_next_number_off_times(self,times):
+        for i in range(times):
+            self.click_next_btn()
+        time.sleep(2)
+        self.driver.refresh()
+
+
+    def click_write_desc_to_product(self):
+        add_action = ActionChains(self.driver)
+        add_btn = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, self.add_description_btn))
+        )
+
+        add_action.move_to_element(add_btn).click(add_btn).perform()
+
+
+
+    def write_desc_to_product(self,write):
+
+        write_box = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, self.writing_box))
+        )
+        write_box.send_keys(write)
+
+
+    def cilck_save_desc_chages(self):
+        save = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, self.save_changes_btn))
+        )
+
+        save.click()
+
