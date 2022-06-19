@@ -1,4 +1,7 @@
 """ utils functions"""
+import random
+import string
+
 from selenium.webdriver import Keys
 import allure
 import time
@@ -114,5 +117,18 @@ class Utilitis():
             time.sleep(6)
             assert j == util.get_text("//table[1]/tbody[1]/tr[1]/td[2]")
             print(f" {j} is correct")
+
+    def randomString(self):
+        letters = string.ascii_letters
+        x = ''.join(random.choice(letters)for i in range(10))
+        return x
+
+
+
+
+
+
+
+
 
 

@@ -6,12 +6,15 @@ from Managment.Web.Base.BasePage import Base
 from Managment.Web.Pages.Department_page import DepartmentPageFunc
 from selenium.webdriver.support import expected_conditions as EC
 from Managment.Web.Utils.utils import Utilitis
-import pyautogui
+from Managment.DB.BaseMongoDB2 import MongoDB
 
-"""Test for department export"""
+DB = MongoDB("trado_qa", "department")
+
+
 @pytest.mark.usefixtures('connect_home_page')
 class TestDepartment(Base):
 
+    """Test for department export"""
     def test_Export_departments_properly_success(self):
         # Reboots the driver
         driver = self.driver
@@ -24,6 +27,8 @@ class TestDepartment(Base):
         # Using the "export button" function
         util.exportBtn()
         time.sleep(3)
+
+
 
     """Tests for Creating a new department"""
     def test_Adding_a_department_success(self):
@@ -38,9 +43,11 @@ class TestDepartment(Base):
         driver.implicitly_wait(2)
         # Using the "add button" function
         time.sleep(3)
-        util.addBtn()
+        util.addBtn(True)
+        # Using the "random string" function
+        name = util.randomString()
         # Using the "enter name" function
-        add.enter_name('תוספות')
+        add.enter_name(name)
         # Using the "add photo" function
         util.add_photo(r'''C:\Users\R.png''')
         # Using the "add background photo" function
@@ -49,10 +56,12 @@ class TestDepartment(Base):
         add.click_on_add_button()
         driver.implicitly_wait(2)
         # Using the "searchField" function
-        util.searchField('תוספות')
+        util.searchField(name)
         time.sleep(10)
         # Using the "assert" function
-        util.assertFunc(add.assertDepartment(True), 'תוספות')
+        util.assertFunc(add.assertDepartment(True), name)
+        print(DB.find([name]))
+        # util.assertFunc(DB.find(["name"]))
 
     def test_Create_a_new_department_invalid_when_all_fields_are_null(self):
         # Reboots the driver
@@ -355,7 +364,7 @@ class TestDepartment(Base):
         # Using the "assert" function
         util.assertFunc(add.assertDepartment(False), 'נביעות')
 
-    def test_Update_properly_when_an_update_is_made_only_in_the_photo_field(self):
+    def test_Update_properly_when_an_update_is_made_only_in_the_Background_photo_field(self):
         # Reboots the driver
         driver = self.driver
         # Definition of a variable that uses the methods of the Utils class
@@ -373,10 +382,10 @@ class TestDepartment(Base):
         add.click_on_update_button()
         # Using the "assert" function
         time.sleep(6)
-        print(add.assert_img_src())
-        util.assertFunc(add.assert_img_src(),'https://storage.cloud.google.com/trado_images/department/461hdlknbycfhypslie6ckppafmkm-1655300140821')
+        print(add.assert_img_src_photo())
+        util.assertFunc(add.assert_img_src_photo(),'https://storage.cloud.google.com/trado_images/department/461hdlknbycfhypslie6ckppafmkm-1655315881737')
 
-    def test_Update_properly_when_an_update_is_made_only_in_the_Background_photo_field(self):
+    def test_Update_properly_when_an_update_is_made_only_in_the__photo_field(self):
         # Reboots the driver
         driver = self.driver
         # Definition of a variable that uses the methods of the Utils class
@@ -393,12 +402,24 @@ class TestDepartment(Base):
         # Using the "click on update button" function
         add.click_on_update_button()
         # Using the "assert" function
-        time.sleep(6)
         a = driver.find_element(By.XPATH, "//tbody/tr[2]/td[3]/div[1]/img[1]").get_attribute("src")
-        assert a == "https://storage.cloud.google.com/trado_images/department/461hdlknbycfhypslie6ckppafmkm-1655305253506"
+        time.sleep(6)
+        util.assertFunc(add.img_src_position_2)
+        # assert a == "https://storage.cloud.google.com/trado_images/department/461hdlknbycfhypslie6ckppafmkm-1655322100824"
 
-       # print(add.assert_img_src())
-       # util.assertFunc(add.assert_img_src(),'https://storage.cloud.google.com/trado_images/department/461hdlknbycfhypslie6ckppafmkm-1655300140821')
+
+    def test(self):
+        # Reboots the driver
+        driver = self.driver
+        # Definition of a variable that uses the methods of the Utils class
+        util = Utilitis(driver)
+
+        res =util.randomString()
+        print(res)
+
+
+
+
 
 
 

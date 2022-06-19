@@ -23,12 +23,13 @@ class DepartmentPageFunc:
         self.update_button = Department_Locators.update_button
         self.assert_img = Department_Locators.assert_img
         self.dropMenu_option_department = Department_Locators.dropMenu_option_department
+        self.img_src_position_2 = Department_Locators.img_src_position_2
 
 
     def click_department_button(self):
         self.driver.find_element(By.CSS_SELECTOR,self.department_button).click()
 
-    def enter_name(self,name):
+    def enter_name(self, name):
         self.driver.find_element(By.CSS_SELECTOR,self.name_field).clear()
         self.driver.find_element(By.CSS_SELECTOR,self.name_field).send_keys(name)
 
@@ -72,7 +73,10 @@ class DepartmentPageFunc:
     def click_on_update_button(self):
         self.driver.find_element(By.CLASS_NAME, self.update_button).click()
 
-    def assert_img_src(self):
+    def assert_img_src_photo(self):
+         return self.driver.find_element(By.CLASS_NAME, self.assert_img).get_attribute("src")
+
+    def assert_img_src_photo(self):
          return self.driver.find_element(By.CLASS_NAME, self.assert_img).get_attribute("src")
 
 

@@ -25,3 +25,4 @@ class Department_Locators:
 
     """ Locators for departments Update"""
     update_button = "form_submitBtn"
+    img_src_position_2 = "https://storage.cloud.google.com/trado_images/department/461hdlknbycfhypslie6ckppafmkm-1655322100824"

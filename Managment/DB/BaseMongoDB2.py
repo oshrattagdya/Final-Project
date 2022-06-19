@@ -12,6 +12,18 @@ class MongoDB():
             return i
 
 
+DB = MongoDB("trado_qa", "department")
+print(DB)
 
 
-# MongoDB("trado_qa","users").find()
+myclient = pymongo.MongoClient("mongodb+srv://test_dev:AtmNf7Iz5BIs0dzc@cluster0.qnr3p.mongodb.net/?retryWrites=true&w=majority")
+mydb = myclient["trado_qa"]
+mycol = mydb["department"]
+x = mycol.find("")
+print(x)
+
+
+
+
+
+
