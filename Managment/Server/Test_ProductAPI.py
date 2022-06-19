@@ -1,6 +1,6 @@
 import pytest
 import requests
-from ..DB.BaseMongoDB2 import MongoDB
+from Managment.DB.BaseMongoDB2 import MongoDB
 db = MongoDB("trado_qa", "products")
 
 class TestProductAPI():
@@ -26,6 +26,7 @@ class TestProductAPI():
         db_result = product_in_db["price"]
         myobj_result = myobj["price"]
         assert myobj_result == db_result
+
 
 
 
@@ -172,4 +173,10 @@ class TestProductAPI():
 
 
 
-
+    def test_date(self):
+        product_in_db = db.find({"name": "Charger"})
+        db_date = product_in_db["expirationDate"]
+        x = str(db_date)
+        x = x[:10]
+        print(x)
+        print(x[::-1])

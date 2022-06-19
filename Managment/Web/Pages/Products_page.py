@@ -1,5 +1,6 @@
 import time
 
+import allure
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from ..Locators.Products_locators import ProductsLocators
@@ -50,6 +51,7 @@ class ProductsPageFunc:
         self.all_form_stage_conntent = ProductsLocators.all_form_stage_conntent
         self.quit_form_btn = ProductsLocators.quit_form_btn
 
+    @allure.step("get all 5 form stages ")
     def form_conntent(self):
         b = {}
         f = []
@@ -62,7 +64,7 @@ class ProductsPageFunc:
             text = x.text.split("\n")
             b[text[0]] = text[1]
             if i == 1:
-                self.set_mendetury_fields_of_product("dff", "dsfsdf", 12)
+                self.set_mandatory_fields_of_product("dff", "dsfsdf", 12)
                 self.click_next_btn()
             elif i == 2:
                 self.category_option("חטיפים")
@@ -83,8 +85,7 @@ class ProductsPageFunc:
             f.append(after_text[0] +" "+ after_text[1])
         return b
 
-
-
+    @allure.step("get all table columns ")
     def column_conntent_text(self):
         columns = []
         for i in range(1,18):
@@ -95,9 +96,8 @@ class ProductsPageFunc:
 
         return columns
 
-
-
-    def option_conntent_text(self):
+    @allure.step("get all options content ")
+    def option_content_text(self):
         ops = []
 
         for i in range(1,6):
@@ -106,25 +106,19 @@ class ProductsPageFunc:
             ops.append(x.text)
         return ops
 
-
-
-
-
-
-
+    @allure.step("click quit button")
     def click_quit_btn(self):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, self.quit_form_btn))
         ).click()
 
-
-
-
+    @allure.step("Click product on navbar")
     def click_products_btn(self):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, self.dasbord_products_btn))
         ).click()
 
+    @allure.step("Click next button ")
     def click_next_btn(self):
         action = ActionChains(self.driver)
 
@@ -133,6 +127,7 @@ class ProductsPageFunc:
         )
         action.move_to_element(next).click(next).perform()
 
+    @allure.step("Click back button")
     def click_back_btn(self):
         back_action = ActionChains(self.driver)
         back = WebDriverWait(self.driver, 10).until(
@@ -140,28 +135,33 @@ class ProductsPageFunc:
         )
         back_action.move_to_element(back).click(back).perform()
 
+    @allure.step("Click active button")
     def click_status_active_op(self):
 
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, self.product_status_op))
         ).click()
 
+    @allure.step("Insert barcode name to form")
     def insert_barcode_name(self, barcode_data=None):
         barcode = self.driver.find_element(By.CSS_SELECTOR, self.barcode_field)
         barcode.clear()
         barcode.send_keys(barcode_data)
 
+    @allure.step("Insert product name to form")
     def insert_product_name(self, product_data=None):
         product = self.driver.find_element(By.CSS_SELECTOR, self.product_name_field)
         product.clear()
         product.send_keys(product_data)
 
+    @allure.step("Insert product price to form")
     def insert_product_price(self, price_data=None):
         price = self.driver.find_element(By.CSS_SELECTOR, self.product_price)
         price.clear()
         price.send_keys(price_data)
 
-    def set_mendetury_fields_of_product(self, barcode_data, product_name, product_price_data):
+    @allure.step("Set all mandatory fields to form")
+    def set_mandatory_fields_of_product(self, barcode_data, product_name, product_price_data):
         self.barcode_data = barcode_data
         self.product_name = product_name
         self.product_price_data = product_price_data
@@ -171,12 +171,16 @@ class ProductsPageFunc:
 
         self.driver.find_element(By.CSS_SELECTOR, self.product_price).send_keys(self.product_price_data)
 
+    @allure.step("Insert product expiration date to form")
     def insert_expiration_date(self, expiration_date):
         self.expiration_date = expiration_date
+
         date = self.driver.find_element(By.CSS_SELECTOR, self.date_field)
         date.clear()
+        time.sleep(2)
         date.send_keys(self.expiration_date)
 
+    @allure.step("Select category option")
     def category_option(self, op):
         self.category = self.driver.find_element(By.CSS_SELECTOR, self.cate_btn)
         self.category.click()
@@ -184,11 +188,12 @@ class ProductsPageFunc:
         options = self.driver.find_element(By.XPATH, self.cate_op.format(op))
         options.click()
 
+    @allure.step("Clear data from category field")
     def clear_category_field(self):
         self.category = self.driver.find_element(By.CSS_SELECTOR, self.cate_btn)
         self.category.clear()
 
-
+    @allure.step("Select department option")
     def dep_option(self, op):
         self.department = self.driver.find_element(By.CSS_SELECTOR, self.dep_btn)
         self.department.click()
@@ -196,9 +201,11 @@ class ProductsPageFunc:
         options = self.driver.find_elements(By.XPATH, self.store_op)
         options[op].click()
 
+    @allure.step("Click department first option")
     def click_dep_auto_option(self):
         self.driver.find_element(By.XPATH, self.dep_auto_op).click()
 
+    @allure.step("Click on Yvoan option")
     def click_yvoan_op(self):
         action_yvoan = ActionChains(self.driver)
 
@@ -207,7 +214,7 @@ class ProductsPageFunc:
         )
         action_yvoan.move_to_element(yvoan).click(yvoan).perform()
 
-
+    @allure.step("Select store option")
     def store_option(self, op):
         self.store = self.driver.find_element(By.CSS_SELECTOR, self.store_btn)
         self.store.click()
@@ -216,10 +223,12 @@ class ProductsPageFunc:
         options = self.driver.find_element(By.XPATH, self.store_op.format(op))
         options.click()
 
+    @allure.step("Clear data from store field")
     def clear_store_field(self):
         self.category = self.driver.find_element(By.CSS_SELECTOR, self.store_btn)
         self.category.clear()
 
+    @allure.step("Select kidon option")
     def kidom_option(self, op):
         kidom = self.driver.find_element(By.XPATH, self.kidom_field)
         kidom.click()
@@ -227,6 +236,7 @@ class ProductsPageFunc:
         options = self.driver.find_elements(By.XPATH, self.kidom_op)
         options[op].click()
 
+    @allure.step("Click wight option and set data")
     def set_wight_op_on_with_data(self, op, wight):
         self.driver.find_element(By.XPATH, self.wight_btn).click()
         avg_wight = self.driver.find_element(By.XPATH, self.wight_avg_per_unit_field)
@@ -238,6 +248,7 @@ class ProductsPageFunc:
         options = self.driver.find_element(By.XPATH, self.scale_op.format(op))
         options.click()
 
+    @allure.step("Set Boxes amount to form ")
     def set_boxes_amout_data(self, boxes, amount, min):
         boxes_amount = self.driver.find_element(By.XPATH, self.boxes_amout_field)
         boxes_amount.clear()
@@ -251,6 +262,7 @@ class ProductsPageFunc:
         min_amount.clear()
         min_amount.send_keys(min)
 
+    @allure.step("Set address data to form")
     def set_address_data(self, city, street, home, contact):
         city_input = self.driver.find_element(By.XPATH, self.city_field)
         city_input.clear()
@@ -268,6 +280,7 @@ class ProductsPageFunc:
         contact_num_input.clear()
         contact_num_input.send_keys(contact)
 
+    @allure.step("Add description details to a product to form")
     def description_details(self, desc):
         description = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, self.desc_boxs))
@@ -275,6 +288,7 @@ class ProductsPageFunc:
         description.clear()
         description.send_keys(desc)
 
+    @allure.step("Get specific information on product ")
     def row_details(self, op):
         time.sleep(2)
         bar = self.driver.find_element(By.CSS_SELECTOR, self.row_res_details.format(1)).text
@@ -295,14 +309,13 @@ class ProductsPageFunc:
         else:
             return data
 
-
+    @allure.step("Click next button number of times ")
     def click_next_number_off_times(self,times):
         for i in range(times):
             self.click_next_btn()
         time.sleep(2)
-        self.driver.refresh()
 
-
+    @allure.step("Click on write description to product")
     def click_write_desc_to_product(self):
         add_action = ActionChains(self.driver)
         add_btn = WebDriverWait(self.driver, 10).until(
@@ -311,8 +324,7 @@ class ProductsPageFunc:
 
         add_action.move_to_element(add_btn).click(add_btn).perform()
 
-
-
+    @allure.step("Write comment on product")
     def write_desc_to_product(self,write):
 
         write_box = WebDriverWait(self.driver, 10).until(
@@ -320,8 +332,8 @@ class ProductsPageFunc:
         )
         write_box.send_keys(write)
 
-
-    def cilck_save_desc_chages(self):
+    @allure.step("Click save on changes")
+    def click_save_desc_changes(self):
         save = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, self.save_changes_btn))
         )

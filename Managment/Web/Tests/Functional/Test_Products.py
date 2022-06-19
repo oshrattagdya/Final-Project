@@ -30,7 +30,7 @@ class TestProducts(Base):
         # util.add_photo(pic)
         # insert mendetury fields
         n = random.randint(1,9)
-        prod.set_mendetury_fields_of_product(f"00{n}1", "android", 2500)
+        prod.set_mandatory_fields_of_product(f"00{n}1", "android", 2500)
         time.sleep(2)
         prod.click_next_btn()
         # stage 2 categories = ["משקאות","סוכריה","פרחים","חטיפים","קנאביס","45645"]
@@ -337,7 +337,7 @@ class TestProducts(Base):
         prod.click_write_desc_to_product()
         descprtion_to_write = "add new comment"
         prod.write_desc_to_product(descprtion_to_write)
-        prod.cilck_save_desc_chages()
+        prod.click_save_desc_changes()
         time.sleep(2)
         prod.click_write_desc_to_product()
         descprtion = util.get_text(prod.writing_box)
@@ -363,18 +363,28 @@ class TestProducts(Base):
         print(message)
         util.assertFunc(message,expected_result)
 
-    """test 8 editing """
+    """test 18 editing """
 
     def test_search_for_specific_product_and_edit_a_product_exp_date_corrctly(self):
-        driver = self.driver
-        util = Utilitis(driver)
-        prod = ProductsPageFunc(driver)
-        # nev to products screen
-        prod.click_products_btn()
-        # search for a product to edit
-        util.search_box("0061")
+        # driver = self.driver
+        # util = Utilitis(driver)
+        # prod = ProductsPageFunc(driver)
+        # # nev to products screen
+        # prod.click_products_btn()
+        # # search for a product to edit
+        # util.search_box("Charger")
+        new_date = "11-18-2025"
+        # prod.insert_expiration_date(new_date)
+        # prod.click_next_number_off_times(5)
+        product_in_db = db.find({"name":"Charger"})
+        db_date = product_in_db["expirationDate"]
+        db_date = str(db_date)[:10]
+        print(db_date)
+        print(datetime(new_date))
 
-    """test 18 editing """
+
+
+    """test 19 editing """
     def test_export_file_to_pc(self):
         driver = self.driver
         util = Utilitis(driver)
