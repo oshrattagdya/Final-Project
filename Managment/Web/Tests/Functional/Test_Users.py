@@ -170,7 +170,6 @@ class TestUsers(Base):
         user.addphone("1952222229")
         user.store_option("")
         user.update_btn()
-        sleep(2)
         a = user.get_text(UsersLocators.update)
         util.assertFunc(a,"as")
 
