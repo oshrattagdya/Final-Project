@@ -5,6 +5,18 @@ class ProductsLocators:
     desc_boxs = "input[placeholder='תיאור']"
     product_status_op = ".checkbox_checkboxCircle"
     row_res_details = "tbody tr:nth-child(1) td:nth-child({})"
+    quit_form_btn = "div:nth-child(1) > div:nth-child(5) > div:nth-child(1) > span:nth-child(2) "
+
+
+    #UI
+    amount_result = "div.table_tableScroll div.paging_paging > div:nth-child(2)"
+    table_column = "th:nth-child({})"
+    check = "th:nth-child(1)"
+    option_content = "//main[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[{}]"
+    all_form_stage_conntent = "form:nth-child(1) > div:nth-child(1) > div:nth-child({})"
+
+
+
 
 
     # edting descreption box

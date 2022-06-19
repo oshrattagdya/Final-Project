@@ -44,6 +44,80 @@ class ProductsPageFunc:
         self.writing_box = ProductsLocators.writing_box
         self.save_changes_btn = ProductsLocators.save_changes_btn
         self.all_desc_box = ProductsLocators.all_desc_box
+        self.amount_result = ProductsLocators.amount_result
+        self.table_column = ProductsLocators.table_column
+        self.option_content = ProductsLocators.option_content
+        self.all_form_stage_conntent = ProductsLocators.all_form_stage_conntent
+        self.quit_form_btn = ProductsLocators.quit_form_btn
+
+    def form_conntent(self):
+        b = {}
+        f = []
+        stage_5 = self.driver.find_element(By.CSS_SELECTOR,self.all_form_stage_conntent.format(5)).text.split("\n")
+        for i in range(1,6):
+            if i == 5:
+                b[stage_5[0]] = stage_5[1]
+                continue
+            x = self.driver.find_element(By.CSS_SELECTOR,self.all_form_stage_conntent.format(i))
+            text = x.text.split("\n")
+            b[text[0]] = text[1]
+            if i == 1:
+                self.set_mendetury_fields_of_product("dff", "dsfsdf", 12)
+                self.click_next_btn()
+            elif i == 2:
+                self.category_option("חטיפים")
+                self.click_dep_auto_option()
+                self.store_option("סופר כל רונן בע״מ")
+                self.click_next_btn()
+            elif i == 3:
+                self.set_boxes_amout_data("12","22","2")
+                self.click_next_btn()
+            elif i == 4:
+                self.set_address_data("","","","0542245936")
+                self.click_next_btn()
+            else:
+                self.click_quit_btn()
+                break
+
+            after_text = x.text.split("\n")
+            f.append(after_text[0] +" "+ after_text[1])
+        return b
+
+
+
+    def column_conntent_text(self):
+        columns = []
+        for i in range(1,18):
+            time.sleep(1)
+            x = self.driver.find_element(By.CSS_SELECTOR, self.table_column.format(i))
+            columns.append(x.get_attribute("innerText"))
+            # print(x.get_attribute("innerText"))
+
+        return columns
+
+
+
+    def option_conntent_text(self):
+        ops = []
+
+        for i in range(1,6):
+            x = self.driver.find_element(By.XPATH, self.option_content.format(i))
+            time.sleep(1)
+            ops.append(x.text)
+        return ops
+
+
+
+
+
+
+
+    def click_quit_btn(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, self.quit_form_btn))
+        ).click()
+
+
 
 
     def click_products_btn(self):
