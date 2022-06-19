@@ -85,6 +85,22 @@ class ProductsPageFunc:
             f.append(after_text[0] +" "+ after_text[1])
         return b
 
+    @allure.step("fill all form fields ")
+    def fill_all_form_fields(self, barcode, name, price):
+        self.set_mandatory_fields_of_product(barcode, name, price)
+        self.click_next_btn()
+
+        self.category_option("חטיפים")
+        self.click_dep_auto_option()
+        self.store_option("סופר כל רונן בע״מ")
+        self.click_next_btn()
+
+        self.set_boxes_amout_data("12", "22", "2")
+        self.click_next_btn()
+
+        self.set_address_data("bra", "zil", "55", "0542245936")
+        self.click_next_btn()
+
     @allure.step("get all table columns ")
     def column_conntent_text(self):
         columns = []
