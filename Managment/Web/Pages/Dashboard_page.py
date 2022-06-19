@@ -21,6 +21,7 @@ class DashboardPageFunc():
         self.allnav = DashboardLocators.allnav
         self.avg_sum = DashboardLocators.avg_sum
         self.order_sum = DashboardLocators.order_sum
+        self.chart = DashboardLocators.chart
 
 
     @allure.step
@@ -51,20 +52,33 @@ class DashboardPageFunc():
     def users_click(self):
         self.driver.find_element(By.XPATH,self.users).click()
 
+    @allure.step
     def graf_display(self):
         self.driver.find_element(By.XPATH,self.graf).is_displayed()
 
+    @allure.step
     def avrage(self):
         self.driver.find_element(By.XPATH,self.avg_sum).is_displayed()
         avg = self.driver.find_element(By.XPATH,self.avg_sum).text
         return avg
 
+    @allure.step
     def order_(self):
         self.driver.find_element(By.XPATH, self.order_sum).is_displayed()
         sm = self.driver.find_element(By.XPATH, self.order_sum).text
         return sm
 
+    @allure.step
+    def chart_ui(self):
+        self.driver.find_element(By.XPATH,self.chart).is_displayed()
+        a = self.driver.find_element(By.CSS_SELECTOR,"tbody tr:nth-child(1) td:nth-child(1)").text
+        return a
 
+
+    @allure.step
+    def get_text(self,locator):
+        text = self.driver.find_element(By.XPATH, locator).text
+        return text
 
 
 

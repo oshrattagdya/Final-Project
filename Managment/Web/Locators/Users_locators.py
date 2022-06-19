@@ -22,7 +22,7 @@ class UsersLocators:
     #update locators
     update = "//tbody/tr[1]/td[1]"
     updt_btn = "input[value='עדכון']"
-    head = "//body/div[@id='root']/div[1]/div[4]/div[1]/h4[1]/span[1]"
+    head = "h4[class='title_title modal_title'] span"
 
 
 

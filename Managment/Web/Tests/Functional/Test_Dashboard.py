@@ -8,6 +8,8 @@ from Managment.Web.Locators.Dashboard_locators import DashboardLocators
 from Managment.Web.Utils.utils import Utilitis
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
+from Managment.DB.BaseMongoDB2 import MongoDB
+
 
 
 
@@ -34,15 +36,8 @@ class TestDashboard(Base):
 
 
 
-    def test_ui(self):
-        driver = self.driver
-        dash = DashboardPageFunc(driver)
-        util = Utilitis(driver)
-        dash.graf_display()
-        sum = dash.avrage()
-        util.assertFunc(sum,'₪8753.01')
-        ord = dash.order_()
-        util.assertFunc(ord,"7")
+
+
 
 
 

@@ -19,3 +19,5 @@ class DashboardLocators:
     # ui locators
     avg_sum = "//div[@class='dashboard_pieData']//div[1]//*[name()='svg']//*[name()='g' and contains(@class,'undefined ')]//*[name()='text' and contains(@y,'50%')]//*[name()='tspan' and contains(@class,'donutChart')]"
     order_sum = "//div[@class='dashboard_pieData']//div[2]//*[name()='svg']//*[name()='g' and contains(@class,'undefined ')]//*[name()='text' and contains(@y,'50%')]//*[name()='tspan' and contains(@class,'donutChart')]"
+    chart = "//div[@class='dashboard_closeOrders']"
+    number_navbar = 'span[class="dashboard_countNumber"]'
