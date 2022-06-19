@@ -1,4 +1,5 @@
 import pytest
+import random
 from selenium.webdriver.common.by import By
 from Managment.Web.Base.BasePage import Base
 from Managment.Web.Pages.Users_page import Userspagefunc
@@ -7,7 +8,7 @@ from Managment.Web.Utils.utils import Utilitis
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 from Managment.DB.BaseMongoDB2 import MongoDB
-# db = MongoDB("trado_qa", "products")
+db = MongoDB("trado_qa", "products")
 
 
 
@@ -21,7 +22,6 @@ class TestUsers(Base):
         driver = self.driver
         user = Userspagefunc(driver)
         util = Utilitis(driver)
-        db = MongoDB("trado_qa", "users")
         driver.implicitly_wait(10)
         user.userpage_btn()
         sleep(2)
@@ -29,12 +29,12 @@ class TestUsers(Base):
         user.addname("avi")
         user.addlastname("jambar")
         user.addemil("j@jdj.com")
-        user.addphone("195222228")
+        user.addphone(util.random_with_N_digits(10))
         user.store_option("dddd")
         user.add_btn()
         val = user.get_text(user.varify,"avi")
         sleep(2)
-        data = db.find({'email':"j@jdj.com"})
+        data = db.find_one_key('name',"j@jdj.com")
         util.assertFunc(val,data['firstName'])
 
 

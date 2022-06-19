@@ -1,4 +1,6 @@
 """ utils functions"""
+from random import randint
+
 import random
 import string
 
@@ -117,6 +119,11 @@ class Utilitis():
             time.sleep(6)
             assert j == util.get_text("//table[1]/tbody[1]/tr[1]/td[2]")
             print(f" {j} is correct")
+
+    def random_with_N_digits(self,n):
+        range_start = 10 ** (n - 1)
+        range_end = (10 ** n) - 1
+        return randint(range_start, range_end)
 
     def randomString(self):
         letters = string.ascii_letters
