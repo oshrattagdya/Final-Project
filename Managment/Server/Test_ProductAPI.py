@@ -5,6 +5,8 @@ db = MongoDB("trado_qa", "products")
 
 class TestProductAPI():
 
+
+    """test 1 """
     def test_api_create_prodact_correctly(self):
         url = "https://qa-api.trado.co.il/api/product/create"
 
@@ -27,10 +29,7 @@ class TestProductAPI():
         myobj_result = myobj["price"]
         assert myobj_result == db_result
 
-
-
-
-
+    """test 2"""
     def test_api_create_prodact_incorrectly_when_prodact_name_null(self):
         url = "https://qa-api.trado.co.il/api/product/create"
 
@@ -51,7 +50,7 @@ class TestProductAPI():
 
         assert expected_result == product_in_db
 
-
+    """test 3 """
     def test_api_create_prodact_incorrectly_when_prodact_barcode_null(self):
         url = "https://qa-api.trado.co.il/api/product/create"
 
@@ -73,7 +72,7 @@ class TestProductAPI():
 
         assert expected_result == product_in_db
 
-
+    """test 4"""
     def test_api_create_prodact_incorrectly_when_prodact_price_null(self):
         url = "https://qa-api.trado.co.il/api/product/create"
 
@@ -94,7 +93,7 @@ class TestProductAPI():
 
         assert expected_result == product_in_db
 
-
+    """test 5"""
     def test_api_create_prodact_incorrectly_when_prodact_category_null(self):
         url = "https://qa-api.trado.co.il/api/product/create"
 
@@ -117,7 +116,7 @@ class TestProductAPI():
 
         assert expected_result == product_in_db
 
-
+    """test 6 """
     def test_api_create_prodact_incorrectly_when_prodact_store_null(self):
         url = "https://qa-api.trado.co.il/api/product/create"
 
@@ -140,8 +139,7 @@ class TestProductAPI():
 
         assert expected_result == product_in_db
 
-
-
+    """test 7 """
     def test_api_update_prodact_actice_status_correctly(self):
         status = True
         url = "https://qa-api.trado.co.il/api/product/update"
@@ -173,10 +171,5 @@ class TestProductAPI():
 
 
 
-    def test_date(self):
-        product_in_db = db.find({"name": "Charger"})
-        db_date = product_in_db["expirationDate"]
-        x = str(db_date)
-        x = x[:10]
-        print(x)
-        print(x[::-1])
+
+

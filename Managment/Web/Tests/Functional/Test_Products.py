@@ -49,7 +49,7 @@ class TestProducts(Base):
         time.sleep(1)
         util.addBtn(True)
 
-        prod.set_mendetury_fields_of_product("", "full", 100)
+        prod.set_mandatory_fields_of_product("", "full", 100)
         prod.click_next_btn()
         expecte_result = "Please fill out this field."
         message = util.valid_Message(prod.barcode_field)
@@ -65,7 +65,7 @@ class TestProducts(Base):
         time.sleep(1)
         util.addBtn(True)
 
-        prod.set_mendetury_fields_of_product("03", "", 100)
+        prod.set_mandatory_fields_of_product("03", "", 100)
         prod.click_next_btn()
         expecte_result = "Please fill out this field."
         message = util.valid_Message(prod.product_name_field)
@@ -81,7 +81,7 @@ class TestProducts(Base):
         time.sleep(1)
         util.addBtn(True)
         # price field null
-        prod.set_mendetury_fields_of_product("033", "qa", "")
+        prod.set_mandatory_fields_of_product("033", "qa", "")
         prod.click_next_btn()
         expecte_result = "Please fill out this field."
         message = util.valid_Message(prod.product_price)
@@ -97,7 +97,7 @@ class TestProducts(Base):
         time.sleep(1)
         util.addBtn(True)
         # all fields null
-        prod.set_mendetury_fields_of_product("", "", "")
+        prod.set_mandatory_fields_of_product("", "", "")
         prod.click_next_btn()
         expecte_result = "Please fill out this field."
         message = util.valid_Message(prod.barcode_field)
@@ -114,7 +114,7 @@ class TestProducts(Base):
         time.sleep(1)
         util.addBtn(True)
         #stage 1
-        prod.set_mendetury_fields_of_product("44", "test", "100")
+        prod.set_mandatory_fields_of_product("44", "test", "100")
         prod.click_next_btn()
         # stage 2 fill all fields apart from category option
         prod.kidom_option(0)
@@ -135,7 +135,7 @@ class TestProducts(Base):
         time.sleep(1)
         util.addBtn(True)
         #stage 1
-        prod.set_mendetury_fields_of_product("44", "test", "100")
+        prod.set_mandatory_fields_of_product("44", "test", "100")
         prod.click_next_btn()
         #stage 2 fill all fields apart from store option
         prod.category_option("חטיפים")
@@ -334,27 +334,29 @@ class TestProducts(Base):
         time.sleep(2)
         message = util.get_text(prod.amount_result)
         expected_result = "סה״כ: 0 שורות"
-        print(message)
+
         util.assertFunc(message,expected_result)
 
     """test 18 editing """
 
     def test_search_for_specific_product_and_edit_a_product_exp_date_corrctly(self):
-        # driver = self.driver
-        # util = Utilitis(driver)
-        # prod = ProductsPageFunc(driver)
-        # # nev to products screen
-        # prod.click_products_btn()
-        # # search for a product to edit
-        # util.search_box("Charger")
-        new_date = "11-18-2025"
-        # prod.insert_expiration_date(new_date)
-        # prod.click_next_number_off_times(5)
+        driver = self.driver
+        util = Utilitis(driver)
+        prod = ProductsPageFunc(driver)
+        # nev to products screen
+        prod.click_products_btn()
+        # search for a product to edit
+        util.search_box("Charger")
+        new_date = "05-21-2023"
+        prod.insert_expiration_date(new_date)
+        prod.click_next_number_off_times(5)
         product_in_db = db.find({"name":"Charger"})
         db_date = product_in_db["expirationDate"]
-        db_date = str(db_date)[:10]
-        print(db_date)
-        print(datetime(new_date))
+        #reversd date
+        db_date= prod.revers_date(db_date)
+        #assert
+        util.assertFunc(db_date,new_date)
+
 
 
 
@@ -368,15 +370,11 @@ class TestProducts(Base):
         prod.click_products_btn()
         time.sleep(2)
         util.exportBtn()
-
         driver.implicitly_wait(30)
-        time.sleep(10)
-        while not os.path.exists(r"C:\Users\97253\Downloads\מוצרים - 15.06.22.csv"):
-            time.sleep(1)
-
-            if os.path.isfile(r"C:\Users\97253\Downloads\מוצרים - 15.06.22.csv"):
-                print("file exesist")
-
+        time.sleep(5)
+        expected_result = True
+        result = os.path.exists(r"C:\Users\97253\Downloads\מוצרים - 19.06.22.csv")
+        util.assertFunc(result,expected_result)
 
 
 
