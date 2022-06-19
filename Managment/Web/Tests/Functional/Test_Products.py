@@ -13,11 +13,9 @@ db = MongoDB("trado_qa", "products")
 
 @pytest.mark.usefixtures('connect_home_page')
 class TestProducts(Base):
-
-
-
     """test 1 """
-    def test_add_a_new_product_to_my_store_corrctly(self):
+
+    def test_add_a_new_product_to_my_store_corrctly2(self):
         driver = self.driver
         util = Utilitis(driver)
         prod = ProductsPageFunc(driver)
@@ -28,41 +26,17 @@ class TestProducts(Base):
         # upload photo
         # pic = r'C:\Users\97253\Downloads\goats.jpg'
         # util.add_photo(pic)
-        # insert mendetury fields
-        n = random.randint(1,9)
-        prod.set_mandatory_fields_of_product(f"00{n}1", "android", 2500)
-        time.sleep(2)
+        # set mandatory fields barcode, name ,price
+        n = random.randint(1, 9)
+        prod.fill_all_form_fields(f"00{n}1", f"product{n}", 2500)
         prod.click_next_btn()
-        # stage 2 categories = ["משקאות","סוכריה","פרחים","חטיפים","קנאביס","45645"]
-        #         stores = ["test store","מנו ספנות ","חנות טובה","324","סופר כל רונן בע״מ"]
-        prod.category_option("45645")
-        prod.click_dep_auto_option()
-        prod.store_option("מנו ספנות")
-        prod.kidom_option(0)
-        time.sleep(2)
-        prod.click_next_btn()
-        # stage 3
-        # prod.set_wight_op_on_with_data("גרם", 100)
-        prod.set_boxes_amout_data(100, 20, 10)
-        time.sleep(2)
-        prod.click_next_btn()
-        # stage 4
-        prod.set_address_data("lod", "tech", 100, "0542259745")
-        time.sleep(2)
-        prod.click_next_btn()
-        # stage 5
-        prod.description_details("android   upload")
-        prod.click_status_active_op()
-        time.sleep(2)
-        prod.click_next_btn()
-        time.sleep(2)
+
         driver.refresh()
         util.searchField(f"00{n}1")
-        time.sleep(2)
 
         value = prod.row_details("name")
-        print(value)
-        util.assertFunc(value,"android")
+        util.assertFunc(value, f"product{n}")
+
 
     """test 2"""
     def test_add_a_new_product_to_my_store_incorrctly_when_barcode_field_is_null(self):
