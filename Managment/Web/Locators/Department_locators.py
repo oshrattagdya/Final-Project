@@ -12,7 +12,8 @@ class Department_Locators:
     assert_name_txt_Position_2 = "//tbody/tr[2]/td[2]"
     assert_txt_error = "//div[@class='form_note ']"
     assert_txt_search_error = '.paging_rowsNumView'
-    assert_img = "imageDiv"
+    assert_img = "img[src='https://storage.cloud.google.com/trado_images/department/4jp555dl4grc8zwpslie6ckppafmkm-1655367955340']"
+    assert_img_background = "img[src = 'https://storage.cloud.google.com/trado_images/department/4jp555dl4gt31kypslie6ckppafmkm-1655370885238']"
 
     """ Locators for departments search"""
     Identifier_txt_position2 = "tbody tr:nth-child(2) td:nth-child(1)"

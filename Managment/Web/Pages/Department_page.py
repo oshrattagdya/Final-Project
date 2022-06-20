@@ -24,6 +24,7 @@ class DepartmentPageFunc:
         self.assert_img = Department_Locators.assert_img
         self.dropMenu_option_department = Department_Locators.dropMenu_option_department
         self.img_src_position_2 = Department_Locators.img_src_position_2
+        self.assert_img_background = Department_Locators.assert_img_background
 
 
     def click_department_button(self):
@@ -33,8 +34,8 @@ class DepartmentPageFunc:
         self.driver.find_element(By.CSS_SELECTOR,self.name_field).clear()
         self.driver.find_element(By.CSS_SELECTOR,self.name_field).send_keys(name)
 
-    def add_background_photo(self):
-        self.driver.find_element(By.XPATH,self.background_photo).send_keys(r'''C:\Users\logo-linkedin-4096.png''')
+    def add_background_photo(self,name):
+        self.driver.find_element(By.XPATH,self.background_photo).send_keys(name)
 
     def click_on_add_button(self):
         self.driver.find_element(By.CSS_SELECTOR,self.add_button).click()
@@ -73,11 +74,15 @@ class DepartmentPageFunc:
     def click_on_update_button(self):
         self.driver.find_element(By.CLASS_NAME, self.update_button).click()
 
-    def assert_img_src_photo(self):
-         return self.driver.find_element(By.CLASS_NAME, self.assert_img).get_attribute("src")
+    def assert_img_src_photo(self,x):
+        if x == True:
+            return self.driver.find_element(By.CSS_SELECTOR, self.assert_img).get_attribute("src")
+        else:
+            return self.driver.find_element(By.CSS_SELECTOR, self.assert_img_background).get_attribute("src")
 
-    def assert_img_src_photo(self):
-         return self.driver.find_element(By.CLASS_NAME, self.assert_img).get_attribute("src")
+
+
+
 
 
 
