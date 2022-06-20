@@ -359,7 +359,7 @@ class ProductsPageFunc:
     def revers_date(self,date):
         d = str(date)
         d = d[:10].split("-")
-        d = d[1] + "-" + d[2] + "-" + d[0]
+        d = d[1] + "." + d[2] + "." + d[0]
         return  d
 
 
