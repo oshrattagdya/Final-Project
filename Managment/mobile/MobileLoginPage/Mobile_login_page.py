@@ -59,3 +59,8 @@ class MobileLoginPageFunc():
             EC.presence_of_element_located((AppiumBy.XPATH, self.prodcut_page_))
         )
         store.click()
+
+
+
+
+

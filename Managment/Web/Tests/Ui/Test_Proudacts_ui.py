@@ -26,7 +26,7 @@ class TestCategories(Base):
         prod.click_products_btn()
         util.addBtn(False)
         options = ['הוספה', 'ייצוא', 'add by brand', 'ייבוא', 'תבנית']
-        web_options = prod.option_conntent_text()
+        web_options = prod.option_content_text()
         util.assertFunc(options,web_options)
 
     def test_form(self):

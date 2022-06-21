@@ -1,7 +1,6 @@
 import time
 
 import pytest
-from appium.webdriver.common.appiumby import AppiumBy
 from Managment.mobile.MobileLoginPage.Mobile_login_page import MobileLoginPageFunc
 from Managment.mobile.Connection.Connection import Connection
 from Managment.DB.BaseMongoDB2 import MongoDB
@@ -14,7 +13,6 @@ class TestLogin(Connection):
 
     def test_login_success(self):
         driver = self.driver
-        print(driver.title)
         mobile = MobileLoginPageFunc(driver)
         mobile.enter_phone('1950000000')
         time.sleep(1)
@@ -23,9 +21,9 @@ class TestLogin(Connection):
         mobile.enter_phone_code("1234")
         time.sleep(1)
         mobile.click_on_button_login()
-        time.sleep(2)
-        mobile.click_product_store_btn()
-        time.sleep(5)
+        title = driver.title
+        assert title == "- trado"
+
 
     """test 2 """
 
@@ -43,8 +41,9 @@ class TestLogin(Connection):
         mobile.click_on_button_login()
         time.sleep(2)
         mobile.click_trado_store()
+        title = driver.title
+        assert title == "דשבורד - trado"
 
-        time.sleep(5)
 
     """test 3 """
 
@@ -59,9 +58,9 @@ class TestLogin(Connection):
         mobile.enter_phone_code("4321")
         time.sleep(1)
         mobile.click_on_button_login()
+        value = driver.title
+        assert value == '- trado'
 
-        mobile.click_product_store_btn()
-        time.sleep(5)
 
 
 

@@ -122,7 +122,7 @@ class ProductsPageFunc:
             ops.append(x.text)
         return ops
 
-    @allure.step("click quit button")
+    @allure.step("Click quit button")
     def click_quit_btn(self):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, self.quit_form_btn))

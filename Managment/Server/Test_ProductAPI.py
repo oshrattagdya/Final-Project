@@ -43,7 +43,7 @@ class TestProductAPI():
 
         response = requests.post(url, json=myobj)
         result = response.json()
-        print(result)
+
         """assert with DB"""
         product_in_db = db.find({"barcode":"001927"})
         expected_result = None
@@ -64,10 +64,10 @@ class TestProductAPI():
 
         response = requests.post(url, json=myobj)
         result = response.json()
-        print(result)
+
         """assert with DB"""
         product_in_db = db.find({"name":"test_barcode_null"})
-        print(product_in_db)
+
         expected_result = None
 
         assert expected_result == product_in_db
@@ -86,7 +86,6 @@ class TestProductAPI():
 
         response = requests.post(url, json=myobj)
         result = response.json()
-        print(result)
         """assert with DB"""
         product_in_db = db.find({"name":"test_price_null"})
         expected_result = None
@@ -94,6 +93,8 @@ class TestProductAPI():
         assert expected_result == product_in_db
 
     """test 5"""
+
+    @pytest.mark.skip
     def test_api_create_prodact_incorrectly_when_prodact_category_null(self):
         url = "https://qa-api.trado.co.il/api/product/create"
 
@@ -108,10 +109,9 @@ class TestProductAPI():
 
         response = requests.post(url, json=myobj)
         result = response.json()
-        print(result)
         """assert with DB"""
         product_in_db = db.find({"name":"test_category_null3"})
-        print(product_in_db)
+
         expected_result = None
 
         assert expected_result == product_in_db
@@ -131,10 +131,9 @@ class TestProductAPI():
 
         response = requests.post(url, json=myobj)
         result = response.json()
-        print(result)
+
         """assert with DB"""
         product_in_db = db.find({"name":"test_store_null"})
-        print(product_in_db)
         expected_result = None
 
         assert expected_result == product_in_db

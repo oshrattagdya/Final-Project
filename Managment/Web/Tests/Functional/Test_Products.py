@@ -13,6 +13,7 @@ db = MongoDB("trado_qa", "products")
 class TestProducts(Base):
     """test 1 """
 
+    @pytest.mark.sanity
     def test_add_a_new_product_to_my_store_corrctly2(self):
         driver = self.driver
         util = Utilitis(driver)
@@ -126,6 +127,8 @@ class TestProducts(Base):
         util.assertFunc(expecte_result,message)
 
     """test 7 stage 2 """
+
+    @pytest.mark.sanity
     def test_add_a_new_product_to_my_store_incorrctly_when_store_field_are_null(self):
         driver = self.driver
         util = Utilitis(driver)
@@ -149,6 +152,8 @@ class TestProducts(Base):
         util.assertFunc(expecte_result, message)
 
     """test 8 editing """
+
+    @pytest.mark.sanity
     def test_search_for_specific_product_and_edit_a_product_info_to_my_store_corrctly(self):
         driver = self.driver
         util = Utilitis(driver)
@@ -172,9 +177,11 @@ class TestProducts(Base):
         product_in_db = db.find({"name":"voadka4"})
         db_barcode = product_in_db["barcode"]
 
-        util.assertFunc(f"0{n}99",db_barcode)
+        util.assertFunc(f"0{n}00{n}",db_barcode)
 
     """test 9 editing """
+
+    @pytest.mark.sanity
     def test_edit_a_product_info_incorrctly_when_price_is_letters(self):
         driver = self.driver
         util = Utilitis(driver)
@@ -267,6 +274,7 @@ class TestProducts(Base):
 
     """test 14 editing """
 
+    @pytest.mark.sanity
     def test_activate_product_status_succsessfully(self):
         driver = self.driver
         util = Utilitis(driver)
@@ -348,7 +356,7 @@ class TestProducts(Base):
 
 
     """test 18 editing """
-    @pytest.mark.xfail("date dont update")
+    # @pytest.mark.xfail("date dont update")
     def test_export_file_to_pc(self):
         driver = self.driver
         util = Utilitis(driver)
@@ -361,13 +369,13 @@ class TestProducts(Base):
         driver.implicitly_wait(30)
         time.sleep(5)
         expected_result = True
-        result = os.path.exists(r"C:\Users\97253\Downloads\מוצרים - 20.06.22.csv")
+        result = os.path.exists(r"C:\Users\97253\Downloads\מוצרים - 21.06.22.csv")
         util.assertFunc(result,expected_result)
 
 
 
     """test 19 editing """
-    @pytest.skip
+    @pytest.mark.skip
     def test_edit_product_description_succsessfully(self):
         driver = self.driver
         util = Utilitis(driver)
