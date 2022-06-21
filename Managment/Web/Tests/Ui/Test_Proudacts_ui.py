@@ -29,7 +29,7 @@ class TestCategories(Base):
         web_options = prod.option_content_text()
         util.assertFunc(options,web_options)
 
-    def test_form(self):
+    def test_form_stages_text(self):
         driver = self.driver
         util = Utilitis(driver)
         prod = ProductsPageFunc(driver)
