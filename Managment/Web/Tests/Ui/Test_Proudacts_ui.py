@@ -6,7 +6,7 @@ from Managment.Web.Utils.utils import Utilitis
 
 
 @pytest.mark.usefixtures('connect_home_page')
-class TestCategories(Base):
+class TestProducts(Base):
     def test_ui_for_product_column_table(self):
         driver = self.driver
         util = Utilitis(driver)
