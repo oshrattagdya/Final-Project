@@ -24,7 +24,7 @@ class UsersLocators:
     erorStore = "input[placeholder='חנויות']"
     serName = "tbody tr:nth-child(1) td:nth-child(1)"
     serLastname = "tbody:nth-child(2) tr:nth-child(1) > td:nth-child(2)"
-    serPhone = "tbody tr:nth-child(1) td:nth-child(4)"
+    serPhone = "tbody tr td:nth-child(1)"
     firstName = "tbody:nth-child(2) tr:nth-child(1) > td:nth-child(1)"
 
     #update locators

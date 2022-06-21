@@ -197,9 +197,11 @@ class TestUsers(Base):
         util = Utilitis(driver)
         driver.implicitly_wait(10)
         user.userpage_btn()
-        util.search_box("מנגיסטו")
+        util.search_box("אלמיהו")
         lastname = util.get_text(UsersLocators.serLastname)
-        util.assertFunc(lastname,"מנגיסטו")
+        util.assertFunc(lastname,"אלמיהו")
+        data = db.find({'lastName': "אלמיהו"})
+        util.assertFunc(lastname, data['lastName'])
 
 
     #10
@@ -212,6 +214,8 @@ class TestUsers(Base):
         user.search_box("0549703147")
         phone = util.get_text(UsersLocators.serPhone)
         util.assertFunc(phone,"0549703147")
+        data = db.find({'phone': "0549703147"})
+        util.assertFunc(phone, data['phone'])
 
     #11
     def test_valid_update(self):

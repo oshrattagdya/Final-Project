@@ -16,9 +16,9 @@ class TestDashboardUI(Base):
         util = Utilitis(driver)
         dash.graf_display()
         sum = dash.avrage()
-        util.assertFunc(sum ,'₪8753.01')
+        util.assertFunc(sum ,'₪8835.04')
         ord = dash.order_()
-        util.assertFunc(ord ,"7")
+        util.assertFunc(ord ,"10")
         chr = dash.chart_ui()
         util.assertFunc(chr ,"486")
 
