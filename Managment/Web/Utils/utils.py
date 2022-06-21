@@ -130,6 +130,10 @@ class Utilitis():
         x = ''.join(random.choice(letters)for i in range(10))
         return x
 
+    def randomString2letters(self):
+        letters = string.ascii_letters
+        x = ''.join(random.choice(letters) for i in range(3))
+        return x
 
 
 

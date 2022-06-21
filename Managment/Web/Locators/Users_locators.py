@@ -3,6 +3,8 @@
 class UsersLocators:
 
     user_nav_btn = "//span[contains(text(),'משתמשים')]"
+    search_field = "(//input[@type='search'])[1]"
+
 
 
     #add users locators
@@ -18,6 +20,12 @@ class UsersLocators:
     #assert locator
     varify = "//td[normalize-space()='{}']"
     eror_note = "div[class='form_note ']"
+    store_list = ".input_autocompleteBox.input_open"
+    erorStore = "input[placeholder='חנויות']"
+    serName = "tbody tr:nth-child(1) td:nth-child(1)"
+    serLastname = "tbody:nth-child(2) tr:nth-child(1) > td:nth-child(2)"
+    serPhone = "tbody tr:nth-child(1) td:nth-child(4)"
+    firstName = "tbody:nth-child(2) tr:nth-child(1) > td:nth-child(1)"
 
     #update locators
     update = "//tbody/tr[1]/td[1]"

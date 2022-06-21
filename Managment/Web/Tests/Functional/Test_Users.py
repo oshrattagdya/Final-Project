@@ -26,19 +26,67 @@ class TestUsers(Base):
         user.userpage_btn()
         sleep(2)
         util.addBtn(True)
-        user.addname(util.randomString())
-        user.addlastname("jambar")
-        user.addemil("j@jdj.com")
+        name = util.randomString()
+        user.addname(name)
+        lastName = util.randomString()
+        user.addlastname(lastName)
+        em = util.randomString2letters()
+        user.addemil(em+"@jd.com")
         phone = util.random_with_N_digits(10)
         user.addphone(phone)
         user.store_option("dddd")
         user.add_btn()
         val = user.get_text1(user.varify,phone)
         sleep(2)
-        data = db.find({'phone':phone})
+        data = db.find({'firstName':name})
         util.assertFunc(val,data['phone'])
 
-    def test_valid_addUser1(self):
+    #2
+    def test_invalid_phone(self):
+        driver = self.driver
+        user = Userspagefunc(driver)
+        util = Utilitis(driver)
+        driver.implicitly_wait(10)
+        user.userpage_btn()
+        sleep(2)
+        util.addBtn(True)
+        name = util.randomString()
+        user.addname(name)
+        lastName = util.randomString()
+        user.addlastname(lastName)
+        em = util.randomString2letters()
+        user.addemil(em + "@jd.com")
+        phone = util.random_with_N_digits(7)
+        user.addphone(phone)
+        user.store_option("dddd")
+        user.add_btn()
+        val = util.get_text(UsersLocators.eror_note)
+        util.assertFunc(val, 'מס׳ טלפון לא תקין')
+
+    #3
+    def test_invalid_email(self):
+        driver = self.driver
+        user = Userspagefunc(driver)
+        util = Utilitis(driver)
+        driver.implicitly_wait(10)
+        user.userpage_btn()
+        sleep(2)
+        util.addBtn(True)
+        name = util.randomString()
+        user.addname(name)
+        lastName = util.randomString()
+        user.addlastname(lastName)
+        em = util.randomString2letters()
+        user.addemil(em + "jd")
+        phone = util.random_with_N_digits(10)
+        user.addphone(phone)
+        user.store_option("dddd")
+        user.add_btn()
+        emil = util.get_text(UsersLocators.eror_note)
+        util.assertFunc(emil, 'דוא״ל לא תקין')
+
+    #4
+    def test_valid_addUser_ALLnull(self):
         driver = self.driver
         user = Userspagefunc(driver)
         util = Utilitis(driver)
@@ -50,13 +98,15 @@ class TestUsers(Base):
         user.addlastname("")
         user.addemil("")
         user.addphone(util.random_with_N_digits(10))
-        user.store_option("")
         user.add_btn()
-        val = util.get_text(user.varify)
-        sleep(2)
+        massege = util.valid_Message(UsersLocators.erorStore)
+        util.assertFunc(massege, "Please fill out this field.")
+        sleep(3)
+        element = user.displayedElement(UsersLocators.store_list)
+        util.assertFunc(element, "Element found")
 
 
-    #2
+    #5
     def test_invalid_emailNull(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -65,18 +115,21 @@ class TestUsers(Base):
         user.userpage_btn()
         sleep(2)
         util.addBtn(True)
-        user.addname("sd")
-        user.addlastname("jambar")
+        name = util.randomString()
+        user.addname(name)
+        lastName = util.randomString()
+        user.addlastname(lastName)
+        em = util.randomString2letters()
         user.addemil("")
-        user.addphone(util.random_with_N_digits(10))
+        phone = util.random_with_N_digits(10)
+        user.addphone(phone)
         user.store_option("dddd")
         user.add_btn()
         emil = util.get_text(UsersLocators.eror_note)
         util.assertFunc(emil ,'דוא״ל לא תקין')
-        sleep(2)
 
 
-    #3
+    #6
     def test_phoneNull(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -85,9 +138,12 @@ class TestUsers(Base):
         user.userpage_btn()
         sleep(2)
         util.addBtn(True)
-        user.addname("sd")
-        user.addlastname("jambar")
-        user.addemil("d@j.com")
+        name = util.randomString()
+        user.addname(name)
+        lastName = util.randomString()
+        user.addlastname(lastName)
+        em = util.randomString2letters()
+        user.addemil(em + "@jd.com")
         user.addphone("")
         user.store_option("dddd")
         user.add_btn()
@@ -95,7 +151,7 @@ class TestUsers(Base):
         util.assertFunc(val ,'מס׳ טלפון לא תקין')
 
 
-    #4
+    #7
     def test_storeNull(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -104,31 +160,37 @@ class TestUsers(Base):
         user.userpage_btn()
         sleep(2)
         util.addBtn(True)
-        user.addname("sd")
-        user.addlastname("jambar")
-        user.addemil("d@j.com")
-        user.addphone(util.random_with_N_digits(10))
-        sleep(3)
-        user.store_option_click()
+        name = util.randomString()
+        user.addname(name)
+        lastName = util.randomString()
+        user.addlastname(lastName)
+        em = util.randomString2letters()
+        user.addemil(em + "@jd.com")
+        phone = util.random_with_N_digits(10)
+        user.addphone(phone)
+        # user.store_option()
         user.add_btn()
-        store = util.get_text(UsersLocators.eror_note)
-        util.assertFunc(store,'נא למלא שדה זה')
+        element = user.displayedElement(UsersLocators.store_list)
+        util.assertFunc(element,"Element found")
+        massege = util.valid_Message(UsersLocators.erorStore)
+        util.assertFunc(massege,"Please fill out this field.")
 
 
-    #5
+    #8
     def test_serch_User_name(self):
         driver = self.driver
         user = Userspagefunc(driver)
         util = Utilitis(driver)
         driver.implicitly_wait(10)
         user.userpage_btn()
-        util.search_box("ישראל")
-        name = util.get_text("tbody:nth-child(2) tr:nth-child(1) > td:nth-child(1)")
+        user.search_box("ישראל")
+        sleep(2)
+        name = util.get_text(UsersLocators.serName)
         util.assertFunc(name,"ישראל")
-        data = db.find('firstName')
+        data = db.find({'firstName': "ישראל"})
         util.assertFunc(name, data['firstName'])
 
-    #6
+    #9
     def test_serch_User_lastname(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -136,22 +198,22 @@ class TestUsers(Base):
         driver.implicitly_wait(10)
         user.userpage_btn()
         util.search_box("מנגיסטו")
-        lastname = util.get_text("tbody:nth-child(2) tr:nth-child(1) > td:nth-child(2)")
+        lastname = util.get_text(UsersLocators.serLastname)
         util.assertFunc(lastname,"מנגיסטו")
 
 
-    #7
+    #10
     def test_serch_User_phone(self):
         driver = self.driver
         user = Userspagefunc(driver)
         util = Utilitis(driver)
         driver.implicitly_wait(10)
         user.userpage_btn()
-        util.search_box("0549703147")
-        phone = util.get_text("tbody tr:nth-child(1) td:nth-child(4)")
+        user.search_box("0549703147")
+        phone = util.get_text(UsersLocators.serPhone)
         util.assertFunc(phone,"0549703147")
 
-    #8
+    #11
     def test_valid_update(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -160,18 +222,21 @@ class TestUsers(Base):
         user.userpage_btn()
         sleep(2)
         user.update_click()
-        user.addname("as")
-        user.addlastname("jambi")
-        user.addemil("ddd@dJ.com")
-        user.addphone(util.random_with_N_digits(10))
-        user.store_option("shula")
+        name = util.randomString()
+        user.addname(name)
+        lastName = util.randomString()
+        user.addlastname(lastName)
+        em = util.randomString2letters()
+        user.addemil(em + "@jd.com")
+        phone = util.random_with_N_digits(10)
+        user.addphone(phone)
         user.update_btn()
         sleep(2)
-        name = util.get_text("tbody:nth-child(2) tr:nth-child(1) > td:nth-child(1)")
-        util.assertFunc(name,"as")
+        firstName = util.get_text(UsersLocators.firstName)
+        util.assertFunc(firstName,"as")
 
 
-    #9
+    #12
     def test_update_when_store_null(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -180,17 +245,20 @@ class TestUsers(Base):
         user.userpage_btn()
         sleep(2)
         user.update_click()
-        sleep(2)
-        user.addname("as")
-        user.addlastname("jambi")
-        user.addemil("ddd@ddJ.com")
-        user.addphone(util.random_with_N_digits(10))
-        # user.store_option("")
-        driver.find_element(By.CSS_SELECTOR,"div[class='tag_tag'] span").click()
+        name = util.randomString()
+        user.addname(name)
+        lastName = util.randomString()
+        user.addlastname(lastName)
+        em = util.randomString2letters()
+        user.addemil(em + "@jd.com")
+        phone = util.random_with_N_digits(10)
+        user.addphone(phone)
+        driver.find_element(By.CSS_SELECTOR,"div.input_tags div.tag_tag > span:nth-child(1)").click()
         user.update_btn()
-        driver.find_element(By.XPATH,"//label[contains(text(),'כתובת')]").click()
-        eror = util.get_text("div[class='form_note ']")
-        util.assertFunc(eror,"נא למלא שדה זה")
+        massege = util.valid_Message(UsersLocators.erorStore)
+        util.assertFunc(massege, "Please fill out this field.")
+        element = user.displayedElement(UsersLocators.store_list)
+        util.assertFunc(element, "Element found")
 
 
 

@@ -1,4 +1,9 @@
+from telnetlib import EC
+
 import allure
+from selenium.webdriver import Keys
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from Managment.Web.Locators.Users_locators import UsersLocators
 from selenium.webdriver.common.by import By
 from Managment.Web.Utils.utils import Utilitis
@@ -23,7 +28,8 @@ class Userspagefunc():
         self.update = UsersLocators.update
         self.updt_btn = UsersLocators.updt_btn
         self.head = UsersLocators.head
-
+        self.store_list = UsersLocators.store_list
+        self.search_field = UsersLocators.search_field
 
     @allure.step
     def userpage_btn(self):
@@ -84,3 +90,19 @@ class Userspagefunc():
         self.driver.find_element(By.CSS_SELECTOR,self.updt_btn).click()
 
 
+    def displayedElement(self,loctor):
+        element = self.driver.find_element(By.CSS_SELECTOR,loctor)
+        if element.is_displayed():
+            return ("Element found")
+        else:
+            return ("Element not found")
+
+
+    def search_box(self,name):
+        self.name = name
+
+        search = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH,self.search_field)))
+
+        search.send_keys(self.name)
+        search.send_keys(Keys.RETURN)
