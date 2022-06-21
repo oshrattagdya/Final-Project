@@ -69,15 +69,15 @@ class Userspagefunc():
         self.driver.find_element(By.XPATH,self.btnadd).click()
 
     @allure.step
-    def get_text(self,locator,x):
+    def get_text1(self,locator,x):
         text = self.driver.find_element(By.XPATH, locator.format(x)).text
         return text
 
     @allure.step
     def update_click(self):
         self.driver.find_element(By.XPATH,self.update).click()
-        win = self.driver.find_element(By.CSS_SELECTOR,self.head).text
-        assert win == "משתמש"
+        # win = self.driver.find_element(By.CSS_SELECTOR,self.head).text
+        # assert win == "משתמש"
 
     @allure.step
     def update_btn(self):

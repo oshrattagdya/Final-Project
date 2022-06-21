@@ -8,7 +8,7 @@ from Managment.Web.Utils.utils import Utilitis
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 from Managment.DB.BaseMongoDB2 import MongoDB
-db = MongoDB("trado_qa", "products")
+db = MongoDB("trado_qa", "users")
 
 
 
@@ -26,18 +26,34 @@ class TestUsers(Base):
         user.userpage_btn()
         sleep(2)
         util.addBtn(True)
-        user.addname("avi")
+        user.addname(util.randomString())
         user.addlastname("jambar")
         user.addemil("j@jdj.com")
-        user.addphone(util.random_with_N_digits(10))
+        phone = util.random_with_N_digits(10)
+        user.addphone(phone)
         user.store_option("dddd")
         user.add_btn()
-        val = user.get_text(user.varify,"avi")
+        val = user.get_text1(user.varify,phone)
         sleep(2)
-        data = db.find_one_key('name',"j@jdj.com")
-        util.assertFunc(val,data['firstName'])
+        data = db.find({'phone':phone})
+        util.assertFunc(val,data['phone'])
 
-
+    def test_valid_addUser1(self):
+        driver = self.driver
+        user = Userspagefunc(driver)
+        util = Utilitis(driver)
+        driver.implicitly_wait(10)
+        user.userpage_btn()
+        sleep(2)
+        util.addBtn(True)
+        user.addname("")
+        user.addlastname("")
+        user.addemil("")
+        user.addphone(util.random_with_N_digits(10))
+        user.store_option("")
+        user.add_btn()
+        val = util.get_text(user.varify)
+        sleep(2)
 
 
     #2
@@ -48,11 +64,11 @@ class TestUsers(Base):
         driver.implicitly_wait(10)
         user.userpage_btn()
         sleep(2)
-        util.addBtn()
+        util.addBtn(True)
         user.addname("sd")
         user.addlastname("jambar")
         user.addemil("")
-        user.addphone("1952222233")
+        user.addphone(util.random_with_N_digits(10))
         user.store_option("dddd")
         user.add_btn()
         emil = util.get_text(UsersLocators.eror_note)
@@ -68,7 +84,7 @@ class TestUsers(Base):
         driver.implicitly_wait(10)
         user.userpage_btn()
         sleep(2)
-        util.addBtn()
+        util.addBtn(True)
         user.addname("sd")
         user.addlastname("jambar")
         user.addemil("d@j.com")
@@ -87,11 +103,11 @@ class TestUsers(Base):
         driver.implicitly_wait(10)
         user.userpage_btn()
         sleep(2)
-        util.addBtn()
+        util.addBtn(True)
         user.addname("sd")
         user.addlastname("jambar")
         user.addemil("d@j.com")
-        user.addphone("1952222227")
+        user.addphone(util.random_with_N_digits(10))
         sleep(3)
         user.store_option_click()
         user.add_btn()
@@ -107,9 +123,10 @@ class TestUsers(Base):
         driver.implicitly_wait(10)
         user.userpage_btn()
         util.search_box("ישראל")
-        name = util.get_text("//tbody/tr[1]/td[1]")
+        name = util.get_text("tbody:nth-child(2) tr:nth-child(1) > td:nth-child(1)")
         util.assertFunc(name,"ישראל")
-
+        data = db.find('firstName')
+        util.assertFunc(name, data['firstName'])
 
     #6
     def test_serch_User_lastname(self):
@@ -119,8 +136,8 @@ class TestUsers(Base):
         driver.implicitly_wait(10)
         user.userpage_btn()
         util.search_box("מנגיסטו")
-        emil = util.get_text("//tbody/tr[1]/td[2]")
-        util.assertFunc(emil,"מנגיסטו")
+        lastname = util.get_text("tbody:nth-child(2) tr:nth-child(1) > td:nth-child(2)")
+        util.assertFunc(lastname,"מנגיסטו")
 
 
     #7
@@ -131,7 +148,7 @@ class TestUsers(Base):
         driver.implicitly_wait(10)
         user.userpage_btn()
         util.search_box("0549703147")
-        phone = util.get_text("//tbody/tr[1]/td[4]")
+        phone = util.get_text("tbody tr:nth-child(1) td:nth-child(4)")
         util.assertFunc(phone,"0549703147")
 
     #8
@@ -146,11 +163,11 @@ class TestUsers(Base):
         user.addname("as")
         user.addlastname("jambi")
         user.addemil("ddd@dJ.com")
-        user.addphone("1952222239")
+        user.addphone(util.random_with_N_digits(10))
         user.store_option("shula")
         user.update_btn()
         sleep(2)
-        name = util.get_text(UsersLocators.update)
+        name = util.get_text("tbody:nth-child(2) tr:nth-child(1) > td:nth-child(1)")
         util.assertFunc(name,"as")
 
 
@@ -167,11 +184,13 @@ class TestUsers(Base):
         user.addname("as")
         user.addlastname("jambi")
         user.addemil("ddd@ddJ.com")
-        user.addphone("1952222229")
-        user.store_option("")
+        user.addphone(util.random_with_N_digits(10))
+        # user.store_option("")
+        driver.find_element(By.CSS_SELECTOR,"div[class='tag_tag'] span").click()
         user.update_btn()
-        a = user.get_text(UsersLocators.update)
-        util.assertFunc(a,"as")
+        driver.find_element(By.XPATH,"//label[contains(text(),'כתובת')]").click()
+        eror = util.get_text("div[class='form_note ']")
+        util.assertFunc(eror,"נא למלא שדה זה")
 
 
 

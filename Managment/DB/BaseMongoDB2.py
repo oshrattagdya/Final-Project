@@ -15,6 +15,7 @@ class MongoDB():
     def find_one_key(self,key,name):
         data = self.col.find_one({"name":f'{name}'})
         return data[key]
+
     def count_doc(self):
         return self.col.count_documents({})
 
