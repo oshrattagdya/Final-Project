@@ -10,6 +10,7 @@ db = MongoDB("trado_qa","sections")
 @pytest.mark.usefixtures('connect_home_page')
 class TestCategories(Base):
     """test 1"""
+    @pytest.mark.sanity
     def test_add_new_category_to_my_store_correctly(self):
         driver = self.driver
         #using a func to connect the site
@@ -48,6 +49,8 @@ class TestCategories(Base):
         assert db_result == x
 
     """test 2"""
+    @pytest.mark.skip
+
     def test_add_new_category_to_my_store_incorrectly_when_name_field_null(self):
         driver = self.driver
         # using a func to connect the site
@@ -73,13 +76,9 @@ class TestCategories(Base):
         # click on add
         category.click_on_category_add_button()
         time.sleep(3)
-
         """assert"""
         util.assertFunc(category.get_required_message_name(),"נא למלא שדה זה")
-        """ASSERT WITH DB"""
-        # departmentIds = db.find({"name": x})
-        # db_result = departmentIds["name"]
-        # assert db_result == x
+
 
     """test 3"""
     def test_add_new_category_to_my_store_incorrectly_when_category_field_null(self):
@@ -105,8 +104,6 @@ class TestCategories(Base):
         category.click_status_active_op()
         time.sleep(5)
         category.insert_new_category_name(x)
-        # insert department name
-        # category.insert_department_name("")
         #insert name field
         category.insert_field_name(x)
         #select type
@@ -114,15 +111,11 @@ class TestCategories(Base):
         #click on add
         category.click_on_category_add_button()
         category.click_none()
-        driver.implicitly_wait(2)
         time.sleep(4)
-        a = util.get_text("//div[contains(@class,'formItem_departmentIds')]//div[contains(@class,'form_note')][contains(text(),'נא למלא שדה זה')]")
+        a = util.get_text("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(5) > div:nth-child(1) > div:nth-child(3) > form:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3)")
         """assert"""
         util.assertFunc(a,"נא למלא שדה זה")
-        """ASSERT WITH DB"""
-        departmentIds = db.find({"name": x})
-        db_result = departmentIds["name"]
-        assert db_result == x
+
 
     """test 4"""
     def test_add_new_category_to_my_store_incorrectly_when_second_name_field_null(self):
@@ -150,6 +143,7 @@ class TestCategories(Base):
         time.sleep(7)
         category.click_on_category_add_button()
         time.sleep(7)
+        """assert"""
         util.assertFunc(category.get_required_message_second_name_field() , "נא למלא שדה זה")
 
     """test 5"""
@@ -178,6 +172,7 @@ class TestCategories(Base):
         # click on add
         category.click_on_category_add_button()
         time.sleep(5)
+        """assert"""
         util.assertFunc(util.valid_Message(category.type_field),"זהו שדה חובה.")
 
         """test 6"""
@@ -197,6 +192,7 @@ class TestCategories(Base):
         time.sleep(3)
         category.click_on_category_add_button()
         time.sleep(5)
+        """assert"""
         util.assertFunc(util.valid_Message(category.type_field), "זהו שדה חובה.")
 
         """test 7"""
@@ -228,59 +224,52 @@ class TestCategories(Base):
         # click on add
         category.click_on_category_add_button()
         time.sleep(3)
+        """assert"""
         util.assertFunc(category.get_uniq_message(), "אחד או יותר מהשדות אינם ייחודיים")
 
         """test 8"""
-    def test_search_for_specific_category_and_edit_a_category_correctly(self):
+    def test_search_for_specific_category(self):
         driver = self.driver
         # using a func to connect the site
         util = Utilitis(driver)
+        x = util.randomString()
         category = CategoriesPageFunc(driver)
         time.sleep(2)
-        category.click_status_active_op()
+        # category.click_status_active_op()
         time.sleep(3)
         # entering the categories page
         category.click_categories_navbar()
         time.sleep(5)
         #search for category
-        category.search_category("שושי")
+        category.search_category("אושי")
         time.sleep(5)
-        category.click_indentify()
-        time.sleep(5)
-        category.insert_new_category_name("בובי")
-        time.sleep(5)
-        category.insert_field_name("בובי")
-        time.sleep(5)
-        category.type_option("טקסט")
-        time.sleep(5)
-        category.click_update_buttun()
-        time.sleep(5)
-
-        util.assertFunc(category.get_indentify(),"4jp555dl4dvbcra")
+        """asssert"""
+        util.assertFunc(category.get_indentify(),"4jp555dl4n0mk5b")
 
         """test 9"""
     def test_edit_category_incorrectly_when_type_field_null(self):
         driver = self.driver
         # using a func to connect the site
         util = Utilitis(driver)
+        x = util.randomString()
         category = CategoriesPageFunc(driver)
         time.sleep(2)
         # entering the categories page
         category.click_categories_navbar()
         time.sleep(5)
         # search for category
-        category.search_category("בובי")
+        category.search_category("פרחים")
         time.sleep(5)
         category.click_indentify()
         time.sleep(5)
-        category.insert_new_category_name("סוכריה")
+        category.insert_new_category_name(x)
         time.sleep(5)
-        category.insert_field_name("סוכריה")
+        category.insert_field_name(x)
         time.sleep(5)
         # time.sleep(5)
         category.click_update_buttun()
         time.sleep(5)
-
+        """assert"""
         util.assertFunc(util.valid_Message(category.type_field), "זהו שדה חובה.")
 
         """test 10"""
@@ -297,6 +286,7 @@ class TestCategories(Base):
         time.sleep(5)
         expected_result = True
         result = os.path.exists(r"C:\Users\oshra\Downloads\קטגוריות  על - 21.06.22.csv")
+        """assert"""
         util.assertFunc(result, expected_result)
 
 
