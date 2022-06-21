@@ -1,5 +1,6 @@
 import time
 import pytest
+import os.path
 from Managment.Web.Utils.utils import Utilitis
 from Managment.Web.Base.BasePage import Base
 from Managment.Web.Pages.Categories_page import CategoriesPageFunc
@@ -282,7 +283,21 @@ class TestCategories(Base):
 
         util.assertFunc(util.valid_Message(category.type_field), "זהו שדה חובה.")
 
-
+        """test 10"""
+    def test_export_to_pc(self):
+        driver = self.driver
+        # using a func to connect the site
+        util = Utilitis(driver)
+        category = CategoriesPageFunc(driver)
+        time.sleep(2)
+        # entering the categories page
+        category.click_categories_navbar()
+        time.sleep(5)
+        util.exportBtn()
+        time.sleep(5)
+        expected_result = True
+        result = os.path.exists(r"C:\Users\oshra\Downloads\קטגוריות  על - 21.06.22.csv")
+        util.assertFunc(result, expected_result)
 
 
 
