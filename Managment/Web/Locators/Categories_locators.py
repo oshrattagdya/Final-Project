@@ -14,7 +14,7 @@ class CategoriesLocators:
     add_submit = "//input[@value='הוספה']"
     product_status_op = "//span[@class='checkbox_checkboxCircle']"
     add_categ_button = "input[value='הוספה']"
-    assert_name =" //td[contains(text(),'פרחים')]"
+    assert_name = "//tbody/tr/td[2]"
     assert_dep = "//body[1]/div[1]/div[1]/div[2]/main[1]/div[2]/div[1]/div[2]/div[1]/table[1]/tbody[1]/tr[3]/td[3]/div[1]"
     required_message_name = "//div[contains(@class,'formItem_name')]//div[contains(@class,'form_note')][normalize-space()='']"
     required_message_second_name_field = "//div[@class='form_note ']"
