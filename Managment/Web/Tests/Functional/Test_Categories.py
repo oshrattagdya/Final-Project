@@ -41,16 +41,15 @@ class TestCategories(Base):
         category.click_on_category_add_button()
         time.sleep(3)
         driver.implicitly_wait(2)
-        util.assertFunc(category.get_text_name(),x)
-        # util.assertFunc(category.get_text_dep(),"קוניאק")
-        """ASSERT WITH DB"""
-        departmentIds = db.find({"name":x})
-        db_result = departmentIds["name"]
-        assert db_result == x
+        # util.assertFunc(category.get_text_name(),x)
+        util.assertFunc(category.get_text_dep(),"קוניאק")
+        # """ASSERT WITH DB"""
+        # departmentIds = db.find({"name":x})
+        # db_result = departmentIds["name"]
+        # assert db_result == x
 
     """test 2"""
     @pytest.mark.skip
-
     def test_add_new_category_to_my_store_incorrectly_when_name_field_null(self):
         driver = self.driver
         # using a func to connect the site
@@ -228,6 +227,7 @@ class TestCategories(Base):
         util.assertFunc(category.get_uniq_message(), "אחד או יותר מהשדות אינם ייחודיים")
 
         """test 8"""
+    @pytest.mark.skip
     def test_search_for_specific_category(self):
         driver = self.driver
         # using a func to connect the site

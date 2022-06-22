@@ -10,7 +10,8 @@ class Connection:
         print("Initiating Chrome driver")
         desired_cap = {
             "deviceName": "Galaxy A03 Core",
-            "udid": "192.168.4.17:5555",
+            # "udid": "192.168.4.17:5555",
+            "udid": "R7ST10H384H",
             "platformName": "Android",
             "platformVersion": "11",
             "browserName": "Chrome"
