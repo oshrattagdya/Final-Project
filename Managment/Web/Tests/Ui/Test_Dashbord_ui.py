@@ -10,6 +10,7 @@ from Managment.Web.Utils.utils import Utilitis
 @pytest.mark.usefixtures('connect_home_page')
 class TestDashboardUI(Base):
 
+    @pytest.mark.sanity
     def test_ui(self):
         driver = self.driver
         dash = DashboardPageFunc(driver)
@@ -20,7 +21,7 @@ class TestDashboardUI(Base):
         ord = dash.order_()
         util.assertFunc(ord ,"10")
         chr = dash.chart_ui()
-        util.assertFunc(chr ,"486")
+        util.assertFunc(chr ,"492")
 
     def test_ui_navbar(self):
         driver = self.driver
@@ -29,7 +30,7 @@ class TestDashboardUI(Base):
         ls_a = div.find_elements(By.TAG_NAME ,'a')
         actuals = [[] ,[]]
         expecteds = [['קופונים', 'Finances', 'הזמנות', 'מוצרים', 'מבצעים', 'חנויות', 'משתמשים', 'Finances']
-                     ,['7', '1', '322', '84', '21', '56', '130', '2']]
+                     ,['7', '1', '328', '203', '21', '59', '220', '2']]
         for i in ls_a:
             title = i.find_element(By.CSS_SELECTOR,'span[class="dashboard_title"]').text
             num = i.find_element(By.CSS_SELECTOR ,'span[class="dashboard_countNumber"]').text

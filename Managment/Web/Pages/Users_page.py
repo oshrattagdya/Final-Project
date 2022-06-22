@@ -106,3 +106,24 @@ class Userspagefunc():
 
         search.send_keys(self.name)
         search.send_keys(Keys.RETURN)
+
+
+    def fillInputfileds(self,name,phone):
+        lastName = Utilitis.randomString(self)
+        em = Utilitis.randomString2letters()
+        self.driver.find_element(By.XPATH, self.name).clear()
+        self.driver.find_element(By.XPATH, self.name).click()
+        self.driver.find_element(By.XPATH, self.name).send_keys(name)
+        self.driver.find_element(By.XPATH, self.lastname).clear()
+        self.driver.find_element(By.XPATH, self.lastname).click()
+        self.driver.find_element(By.XPATH, self.lastname).send_keys(lastName)
+        self.driver.find_element(By.XPATH, self.emil).clear()
+        self.driver.find_element(By.XPATH, self.emil).click()
+        self.driver.find_element(By.XPATH, self.emil).send_keys(em + "@jd.com")
+        self.driver.find_element(By.XPATH, self.phone).clear()
+        self.driver.find_element(By.XPATH, self.phone).click()
+        self.driver.find_element(By.XPATH, self.phone).send_keys(phone)
+        self.driver.find_element(By.XPATH, self.store).click()
+        options = self.driver.find_element(By.XPATH, self.store_ops.format("dddd"))
+        options.click()
+

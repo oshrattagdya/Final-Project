@@ -19,6 +19,7 @@ db = MongoDB("trado_qa", "users")
 class TestUsers(Base):
 
     #1
+    @pytest.mark.sanity
     def test_valid_addUser(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -43,6 +44,7 @@ class TestUsers(Base):
         util.assertFunc(val,data['phone'])
 
     #2
+    @pytest.mark.sanity
     def test_invalid_phone(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -87,6 +89,7 @@ class TestUsers(Base):
         util.assertFunc(emil, 'דוא״ל לא תקין')
 
     #4
+    @pytest.mark.sanity
     def test_valid_addUser_ALLnull(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -108,6 +111,7 @@ class TestUsers(Base):
 
 
     #5
+    @pytest.mark.sanity
     def test_invalid_emailNull(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -131,6 +135,7 @@ class TestUsers(Base):
 
 
     #6
+    @pytest.mark.sanity
     def test_phoneNull(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -153,6 +158,7 @@ class TestUsers(Base):
 
 
     #7
+    @pytest.mark.sanity
     def test_storeNull(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -177,6 +183,7 @@ class TestUsers(Base):
 
 
     #8
+    @pytest.mark.sanity
     def test_serch_User_name(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -191,6 +198,7 @@ class TestUsers(Base):
         util.assertFunc(name, data['firstName'])
 
     #9
+    @pytest.mark.sanity
     def test_serch_User_lastname(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -218,6 +226,7 @@ class TestUsers(Base):
         util.assertFunc(phone, data['phone'])
 
     #11
+    @pytest.mark.regression
     def test_valid_update(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -241,6 +250,7 @@ class TestUsers(Base):
 
 
     #12
+    @pytest.mark.regression
     def test_update_when_store_null(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -264,7 +274,8 @@ class TestUsers(Base):
         element = user.displayedElement(UsersLocators.store_list)
         util.assertFunc(element, "Element found")
 
-
+    #13
+    @pytest.mark.regression
     def test_export_btn(self):
         driver = self.driver
         user = Userspagefunc(driver)
@@ -277,4 +288,19 @@ class TestUsers(Base):
         util.assertFunc(result, expected_result)
 
 
-
+    # def test_one(self):
+    #     driver = self.driver
+    #     user = Userspagefunc(driver)
+    #     util = Utilitis(driver)
+    #     phone = util.random_with_N_digits(10)
+    #     name = util.randomString()
+    #     driver.implicitly_wait(10)
+    #     user.userpage_btn()
+    #     sleep(2)
+    #     util.addBtn(True)
+    #     user.fillInputfileds(name,phone)
+    #     user.add_btn()
+    #     val = user.get_text1(user.varify, phone)
+    #     sleep(2)
+    #     data = db.find({'firstName': name})
+    #     util.assertFunc(val, data['phone'])
