@@ -1,5 +1,7 @@
 import time
 import random
+from datetime import date
+
 import pytest
 import allure
 import os.path
@@ -342,13 +344,13 @@ class TestProducts(Base):
         prod.click_products_btn()
         # search for a product to edit
         util.search_box("Charger")
-        new_date = "07.23.2022"
+        new_date = "07.26.2022"
         prod.insert_expiration_date(new_date)
         prod.click_next_number_off_times(5)
         product_in_db = db.find({"name":"Charger"})
         db_date = product_in_db["expirationDate"]
         #reversd date
-        db_date= prod.revers_date(db_date)
+        db_date= prod.revers_date(db_date,"up")
         #assert
         util.assertFunc(db_date,new_date)
 
@@ -356,7 +358,6 @@ class TestProducts(Base):
 
 
     """test 18 editing """
-    # @pytest.mark.xfail("date dont update")
     def test_export_file_to_pc(self):
         driver = self.driver
         util = Utilitis(driver)
@@ -368,8 +369,11 @@ class TestProducts(Base):
         util.exportBtn()
         driver.implicitly_wait(30)
         time.sleep(5)
+        today = date.today()
+        x = prod.revers_date(today,"ex")
         expected_result = True
-        result = os.path.exists(r"C:\Users\97253\Downloads\מוצרים - 21.06.22.csv")
+        txt = rf"C:\Users\97253\Downloads\מוצרים - {x}.csv"
+        result = os.path.exists(txt)
         util.assertFunc(result,expected_result)
 
 
