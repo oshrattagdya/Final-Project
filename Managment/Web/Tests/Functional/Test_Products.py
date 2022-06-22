@@ -25,7 +25,7 @@ class TestProducts(Base):
         time.sleep(1)
         util.addBtn(True)
         # upload photo
-        # pic = r'C:\Users\97253\Downloads\goats.jpg'
+        # pic = r'C:\Users\97253\Downloads\upload_test.png'
         # util.add_photo(pic)
         # set mandatory fields barcode, name ,price
         n = random.randint(1, 99)
@@ -37,8 +37,8 @@ class TestProducts(Base):
 
         value = prod.row_details("name")
         util.assertFunc(value, f"product{n}")
-        product_in_db = db.find_one_key("name",f"product{n}")
-        util.assertFunc(product_in_db,value)
+        # product_in_db = db.find_one_key("name",f"product{n}")
+        # util.assertFunc(product_in_db,value)
 
 
     """test 2"""
