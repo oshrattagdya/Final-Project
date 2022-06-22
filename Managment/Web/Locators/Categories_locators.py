@@ -24,7 +24,7 @@ class CategoriesLocators:
     search_name = "//td[contains(text(),'שושנים')]"
     search_categ = "//div[contains(text(),'קוניאק')]"
     update_buttun = "//input[@value='עדכון']"
-    indentify = "//tbody/tr/td[2]"
+    indentify = "//td[normalize-space()='4jp555dl4n0mk5b']"
     status = "//tbody/tr[1]/td[4]"
     ui_categ_page = "//div[@class='pages_children']"
 
