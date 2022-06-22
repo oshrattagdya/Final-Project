@@ -31,7 +31,7 @@ class TestDashboardUI(Base):
         expecteds = [['קופונים', 'Finances', 'הזמנות', 'מוצרים', 'מבצעים', 'חנויות', 'משתמשים', 'Finances']
                      ,['7', '1', '322', '84', '21', '56', '130', '2']]
         for i in ls_a:
-            title = i.find_element(By.CSS_SELECTOR ,'span[class="dashboard_title"]').text
+            title = i.find_element(By.CSS_SELECTOR,'span[class="dashboard_title"]').text
             num = i.find_element(By.CSS_SELECTOR ,'span[class="dashboard_countNumber"]').text
             actuals[0].append(title)
             actuals[1].append(num)

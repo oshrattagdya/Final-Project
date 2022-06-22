@@ -5,6 +5,7 @@ from Managment.Web.Base.BasePage import Base
 from Managment.Web.Pages.Users_page import Userspagefunc
 from Managment.Web.Locators.Users_locators import UsersLocators
 from Managment.Web.Utils.utils import Utilitis
+import os.path
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 from Managment.DB.BaseMongoDB2 import MongoDB
@@ -168,7 +169,6 @@ class TestUsers(Base):
         user.addemil(em + "@jd.com")
         phone = util.random_with_N_digits(10)
         user.addphone(phone)
-        # user.store_option()
         user.add_btn()
         element = user.displayedElement(UsersLocators.store_list)
         util.assertFunc(element,"Element found")
@@ -237,7 +237,7 @@ class TestUsers(Base):
         user.update_btn()
         sleep(2)
         firstName = util.get_text(UsersLocators.firstName)
-        util.assertFunc(firstName,"as")
+        util.assertFunc(firstName,"יוסף")
 
 
     #12
@@ -257,12 +257,24 @@ class TestUsers(Base):
         user.addemil(em + "@jd.com")
         phone = util.random_with_N_digits(10)
         user.addphone(phone)
-        driver.find_element(By.CSS_SELECTOR,"div.input_tags div.tag_tag > span:nth-child(1)").click()
         user.update_btn()
         massege = util.valid_Message(UsersLocators.erorStore)
         util.assertFunc(massege, "Please fill out this field.")
+        sleep(2)
         element = user.displayedElement(UsersLocators.store_list)
         util.assertFunc(element, "Element found")
+
+
+    def test_export_btn(self):
+        driver = self.driver
+        user = Userspagefunc(driver)
+        util = Utilitis(driver)
+        driver.implicitly_wait(10)
+        user.userpage_btn()
+        util.exportBtn()
+        expected_result = True
+        result = os.path.exists(r"/Users/dnylgmbr/Downloads/משתמשים - 22.06.22.csv")
+        util.assertFunc(result, expected_result)
 
 
 

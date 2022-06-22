@@ -82,10 +82,10 @@ class Utilitis():
         driver = self.driver
         try:
             assert a == b
-        except Exception as e:
-            print('Error', format(e))
-            raise allure.attach(self.driver.get_screenshot_as_png(), self.driver.save_screenshot("screenshot"),
-                                attachment_type=AttachmentType.PNG)
+        except AssertionError:
+            allure.attach(self.driver.get_screenshot_as_png(), self.driver.save_screenshot("screenshot"),
+                             attachment_type=AttachmentType.PNG)
+            raise AssertionError
 
     @allure.step
     def exportBtn(self):
@@ -104,7 +104,7 @@ class Utilitis():
     def add_photo(self,url):
         self.driver.find_element(By.XPATH, self.photo_field).send_keys(f'''{url}''')
 
-
+    @allure.step
     def secachItemValidation(self):
         driver = self.driver
         util = Utilitis(driver)
@@ -120,19 +120,22 @@ class Utilitis():
             assert j == util.get_text("//table[1]/tbody[1]/tr[1]/td[2]")
             print(f" {j} is correct")
 
+    @allure.step
     def random_with_N_digits(self,n):
         range_start = 10 ** (n - 1)
         range_end = (10 ** n) - 1
         return randint(range_start, range_end)
 
+    @allure.step
     def randomString(self):
         letters = string.ascii_letters
         x = ''.join(random.choice(letters)for i in range(10))
         return x
 
+    @allure.step
     def randomString2letters(self):
         letters = string.ascii_letters
-        x = ''.join(random.choice(letters) for i in range(3))
+        x = ''.join(random.choice(letters) for i in range(10))
         return x
 
 
