@@ -23,6 +23,7 @@ class TestDashboardUI(Base):
         chr = dash.chart_ui()
         util.assertFunc(chr ,"492")
 
+    @pytest.mark.sanity
     def test_ui_navbar(self):
         driver = self.driver
         util = Utilitis(driver)
